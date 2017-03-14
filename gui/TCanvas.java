@@ -26,10 +26,16 @@ public class TCanvas extends Canvas {
     private int car_y; // will be changed
 
     TCanvas() throws IOException{
+        try { //Intellij
+            background_image = ImageIO.read( new File(getClass().getResource("./images/backgroundGrass.jpg").getPath()));
+            road_image = ImageIO.read(new File(getClass().getResource("./images/road.png").getPath()));
+            car_image = ImageIO.read(new File(getClass().getResource("./images/car-top-view.png").getPath()));
+        } catch (NullPointerException e) { // default
+            background_image = ImageIO.read( new File("./images/backgroundGrass.jpg"));
+            road_image = ImageIO.read( new File("./images/road.png"));
+            car_image = ImageIO.read( new File("./images/car-top-view.png"));
+        }
 
-        background_image = ImageIO.read(new File("images/backgroundGrass.jpg"));
-        road_image = ImageIO.read(new File("images/road.png"));
-        car_image= ImageIO.read(new File("images/car-top-view.png"));
         car_x = 0;
         car_y = 160;
     }
