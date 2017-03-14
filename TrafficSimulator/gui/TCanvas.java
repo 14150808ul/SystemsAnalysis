@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Driver;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferStrategy;
@@ -22,10 +24,11 @@ public class TCanvas extends Canvas {
 
     private BufferStrategy buffer;
 
-    private int car_x; // will be changed
-    private int car_y; // will be changed
+    ArrayList<Driver> drivers;
+    TCanvas(ArrayList<Driver> d) throws IOException{
+        
+        drivers = d;
 
-    TCanvas() throws IOException{
         try { //Intellij
             background_image = ImageIO.read( new File(getClass().getResource("./images/backgroundGrass.jpg").getPath()));
             road_image = ImageIO.read(new File(getClass().getResource("./images/road.png").getPath()));
@@ -35,9 +38,6 @@ public class TCanvas extends Canvas {
             road_image = ImageIO.read( new File("./images/road.png"));
             car_image = ImageIO.read( new File("./images/car-top-view.png"));
         }
-
-        car_x = 0;
-        car_y = 160;
     }
 
     public void paint(Graphics g) {
@@ -49,9 +49,14 @@ public class TCanvas extends Canvas {
         }
 
         g =  buffer.getDrawGraphics();
+
         g.drawImage(background_image, 0, 0, null);
         g.drawImage(road_image, 0, 175, null);
-        g.drawImage(car_image, car_x, car_y, null);
+
+        for( int i = 0; i < drivers.size(); i++ ) {
+          g.drawImage(car_image, drivers.get(i).getPosX(), drivers.get(i).getPosY(), null);
+        }
+
         buffer.show();
         g.dispose();
     }
@@ -59,13 +64,4 @@ public class TCanvas extends Canvas {
     public void update(Graphics g) {
         paint(g);
     }
-
-    public void setCarX(int x) {
-        car_x = x;
-    }
-
-    public void setCarY(int y) {
-        car_y = y;
-    }
-
 }

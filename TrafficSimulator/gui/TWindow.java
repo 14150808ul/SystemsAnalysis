@@ -6,10 +6,12 @@ package gui;
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.awt.Graphics;
+import pattern.Observer;
+import pattern.Subject;
 
-public class TWindow extends JFrame implements ObserverMock {
+public class TWindow extends JFrame implements Observer {
 
-    private SubjectMock subject;
+    private Subject subject;
 
     private TCanvas canvas;
     TWindow(SubjectMock subject) throws IOException {
@@ -19,18 +21,17 @@ public class TWindow extends JFrame implements ObserverMock {
         this.setSize(800, 600);
         this.setResizable(false);
 
-        canvas = new TCanvas();
+       this.subject = subject;
+        this.subject.attach(this);
+
+        canvas = new TCanvas(subject.getDriverAll());
         this.add(canvas);
         setVisible(true);
 
-        this.subject = subject;
-        this.subject.attach(this);
     }
 
     public void update() {
-        canvas.setCarX(subject.getCarPosition());
         Graphics g = canvas.getGraphics();
         canvas.update(g);
-
     }
 }

@@ -1,2 +1,0 @@
-javac -d . *.java
-java gui.GraphicsDriver

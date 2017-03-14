@@ -1,9 +1,9 @@
 //Robert O'Driscoll ---- 14150808
 //CS4125 - Systems Analysis & Design
 //Traffic Simulator
-//ObserverMock.java
+//Observer.java
 //Used for testing purposes
-package gui;
-public interface ObserverMock{
+package pattern;
+public interface Observer{
     public abstract void update();
 }
