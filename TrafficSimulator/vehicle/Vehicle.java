@@ -25,7 +25,7 @@ public class Vehicle
 
     }
 
-    public Vehicle(float max_speed, float acceleration, float velocity, Image car_image)
+    public Vehicle(float max_speed, float acceleration, float velocity)
     {
         this.max_speed = max_speed;
         this.acceleration = acceleration;
