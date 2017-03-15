@@ -6,9 +6,10 @@ import java.io.File;
 //Generic vehicle at the moment, later on make it abstract
 public class Vehicle
 {
-    private float max_speed; //max speed
-    private float acceleration; //change of speed;
-    private float velocity; //current speed and direction
+    private double max_speed; //max speed
+    private double acceleration; //change of speed;
+    private double velocity; //current speed and direction
+    /***Bruce: Ques: why 'car_image' is static in here?*/
     private static Image car_image;
 
     //this block will only get executed once, maybe not a good idea for inheritance??
@@ -16,7 +17,7 @@ public class Vehicle
     {
         try
         {
-            car_image = ImageIO.read(new File(("/src/resources/car.png")));
+            car_image = ImageIO.read(new File(("resource/car.png")));
         }
         catch (Exception e)
         {
@@ -25,7 +26,7 @@ public class Vehicle
 
     }
 
-    public Vehicle(float max_speed, float acceleration, float velocity)
+    public Vehicle(double max_speed, double acceleration, double velocity /*, Image car_image*/)
     {
         this.max_speed = max_speed;
         this.acceleration = acceleration;
@@ -34,28 +35,38 @@ public class Vehicle
 
 
     //max speed of car
-    public float getMax_speed() {
+    public double getMax_speed() {
         return max_speed;
     }
 
-    public void setMax_speed(float max_speed) {
+    public void setMax_speed(double max_speed) {
         this.max_speed = max_speed;
     }
 
     // increase or decrease speed
-    public void setAcceleration(float acceleration) {
+    public void setAcceleration(double acceleration) {
         this.acceleration = acceleration;
     }
 
-    public float getVelocity() {
+    public double getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
+    ///TODO: Attention the current speed should be check if it reach the max speed.
+    public void setVelocity(double velocity) {
+    	if(velocity < max_speed)
+    		this.velocity = velocity;
+    	else
+    		this.velocity = max_speed;
     }
 
     public Image getCar_image() {
         return car_image;
     }
+
+
+	public double getAcceleration() {
+		return acceleration;
+	}
+    
 }

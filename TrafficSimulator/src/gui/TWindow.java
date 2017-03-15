@@ -14,7 +14,7 @@ public class TWindow extends JFrame implements Observer {
     private Subject subject;
 
     private TCanvas canvas;
-    TWindow(SubjectMock subject) throws IOException {
+    public TWindow(Subject subject) throws IOException {
 
         super("Traffic Simulator");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -8,13 +8,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
+import driver.*;
 
 public class TCanvas extends Canvas {
 
@@ -54,7 +54,7 @@ public class TCanvas extends Canvas {
         g.drawImage(road_image, 0, 175, null);
 
         for( int i = 0; i < drivers.size(); i++ ) {
-          g.drawImage(car_image, drivers.get(i).getPosX(), drivers.get(i).getPosY(), null);
+          g.drawImage(car_image, (int) drivers.get(i).getX(), (int) drivers.get(i).getY(), null);
         }
 
         buffer.show();
