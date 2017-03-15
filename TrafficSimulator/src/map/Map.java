@@ -38,9 +38,9 @@ public class Map implements Subject{
 					int carPosX = (int)( eachDriver.getX() + deltaX) ;
 					
 					if(carPosX < 780 && carPosX >-150)
-						eachDriver.setX_pos((int)( eachDriver.getX() + deltaX) );
+						eachDriver.setX((int)( eachDriver.getX() + deltaX) );
 					else
-						eachDriver.setX_pos(-150);
+						eachDriver.setX(-150);
 						
 					//System.out.println( (int) ( deltaX) );
 					

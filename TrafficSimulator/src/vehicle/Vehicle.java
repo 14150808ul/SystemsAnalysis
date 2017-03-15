@@ -9,22 +9,7 @@ public class Vehicle
     private double max_speed; //max speed
     private double acceleration; //change of speed;
     private double velocity; //current speed and direction
-    /***Bruce: Ques: why 'car_image' is static in here?*/
     private static Image car_image;
-
-    //this block will only get executed once, maybe not a good idea for inheritance??
-    static
-    {
-        try
-        {
-            car_image = ImageIO.read(new File(("resource/car.png")));
-        }
-        catch (Exception e)
-        {
-            System.out.println("Temp here sh-maybe?");
-        }
-
-    }
 
     public Vehicle(double max_speed, double acceleration, double velocity /*, Image car_image*/)
     {
