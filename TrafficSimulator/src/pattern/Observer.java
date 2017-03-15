@@ -5,5 +5,5 @@
 //Used for testing purposes
 package pattern;
 public interface Observer{
-    public abstract void update();
+    void update();
 }
