@@ -18,10 +18,10 @@ public class TWindow extends JFrame implements Observer {
 
         super("Traffic Simulator");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
+        this.setSize(1000, 400);
         this.setResizable(false);
 
-       this.subject = subject;
+        this.subject = subject;
         this.subject.attach(this);
 
         canvas = new TCanvas(subject.getDriverAll());

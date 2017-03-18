@@ -37,7 +37,7 @@ public class Map implements Subject{
 					double deltaX = tsf_Util.Formula.getDeltaDisplacement(eachDriver);
 					int carPosX = (int)( eachDriver.getX() + deltaX) ;
 					
-					if(carPosX < 780 && carPosX >-150)
+					if(carPosX < 1000 && carPosX >-150)
 						eachDriver.setX((int)( eachDriver.getX() + deltaX) );
 					else
 						eachDriver.setX(-150);
@@ -76,12 +76,19 @@ public class Map implements Subject{
 	/// NOTICE: the method modefier is public?
 	public void generateDriver(){
 		//generate Driver in here! 
-		driver_list.add(new Driver(new Vehicle(310 /*Max speed*/,0.0 /*Accelerate*/,010 /*initial Velocity*/), new Behavior() {
+		driver_list.add(new Driver(new Vehicle(310 /*Max speed*/,0.0 /*Accelerate*/,2 /*initial Velocity*/), new Behavior() {
 			@Override
 			public void drive() {
 				// TODO Auto-generated method stub
 			}
-		}, 0, 170) );
+		}, 0, 116) );
+
+		driver_list.add(new Driver(new Vehicle(310 /*Max speed*/,0.0 /*Accelerate*/,3 /*initial Velocity*/), new Behavior() {
+			@Override
+			public void drive() {
+				// TODO Auto-generated method stub
+			}
+		}, 400, 160) );
 	}
 	
 	public Lane getLane() {

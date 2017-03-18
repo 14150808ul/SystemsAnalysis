@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
+import java.awt.Color;
 import driver.*;
 
 public class TCanvas extends Canvas {
@@ -38,6 +39,8 @@ public class TCanvas extends Canvas {
             road_image = ImageIO.read( new File("./images/road.png"));
             car_image = ImageIO.read( new File("./images/car-top-view.png"));
         }
+
+        setBackground(new Color(19, 124, 0));
     }
 
     public void paint(Graphics g) {
@@ -49,9 +52,8 @@ public class TCanvas extends Canvas {
         }
 
         g =  buffer.getDrawGraphics();
-
-        g.drawImage(background_image, 0, 0, null);
-        g.drawImage(road_image, 0, 175, null);
+       // g.drawImage(background_image, 0, 0, null);
+        g.drawImage(road_image, 0, 120, null);
 
         for( int i = 0; i < drivers.size(); i++ ) {
           g.drawImage(car_image, drivers.get(i).getX(), drivers.get(i).getY(), null);
