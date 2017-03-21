@@ -3,5 +3,6 @@ package driver;
 
 public interface Behavior
 {
-    void drive();
+	public abstract void drive();
+    //public abstract void changeLane() ;
 }

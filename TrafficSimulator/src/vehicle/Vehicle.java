@@ -1,24 +1,20 @@
 package vehicle;
 import javax.imageio.ImageIO;
-import java.awt.Image;
-import java.io.File;
+import java.awt.Image; 
 
 //Generic vehicle at the moment, later on make it abstract
 public class Vehicle
 {
     private double max_speed; //max speed
-    private double acceleration; //change of speed;
-    private double velocity; //current speed and direction
+    private double max_acceleration; //change of speed;
     private static Image car_image;
 
-    public Vehicle(double max_speed, double acceleration, double velocity /*, Image car_image*/)
+    public Vehicle(double max_speed, double max_acceleration)
     {
         this.max_speed = max_speed;
-        this.acceleration = acceleration;
-        this.velocity = velocity;
+        this.max_acceleration = max_acceleration ;
     }
-
-
+    
     //max speed of car
     public double getMax_speed() {
         return max_speed;
@@ -29,20 +25,8 @@ public class Vehicle
     }
 
     // increase or decrease speed
-    public void setAcceleration(double acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public double getVelocity() {
-        return velocity;
-    }
-
-    ///TODO: Attention the current speed should be check if it reach the max speed.
-    public void setVelocity(double velocity) {
-    	if(velocity < max_speed)
-    		this.velocity = velocity;
-    	else
-    		this.velocity = max_speed;
+    public void setMax_acceleration(double max_acceleration ) {
+        this.max_acceleration  = max_acceleration ;
     }
 
     public Image getCar_image() {
@@ -50,8 +34,8 @@ public class Vehicle
     }
 
 
-	public double getAcceleration() {
-		return acceleration;
+	public double getMax_acceleration() {
+		return max_acceleration ;
 	}
     
 }

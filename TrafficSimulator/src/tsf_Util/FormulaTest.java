@@ -14,9 +14,9 @@ class FormulaTest {
     private Driver driver;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
-        Vehicle vehicle = new Vehicle(10, 10, 10);
+        Vehicle vehicle = new Vehicle(10, 10);
         OldDriver oldDriver = new OldDriver();
-        driver = new Driver(vehicle, oldDriver, 10, 10);
+        driver = new Driver(vehicle, oldDriver, 10, 10, 1, 1);
     }
 
     @org.junit.jupiter.api.Test
