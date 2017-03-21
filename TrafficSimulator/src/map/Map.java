@@ -41,17 +41,17 @@ public class Map implements Subject{
 	***/
 	public void generateDriver(){		
 		//generate Driver in here! 
-		Driver driver = new Driver(new Vehicle(100 /*Max speed*/,5.42 /*Max Accelerate*//*, initial speed setting*/), new Behavior() {
+		Driver driver = new Driver(new Vehicle(310,0), new Behavior() {
 			@Override
 			public void drive() {
 				// TODO Auto-generated method stub
 			}
-		}, 0, 120, 0, 0);
-		driver.setAcceleration(0.01);
+		}, 0, 116, 2, 0);
+		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
 		
-		driver.changeLane();
+		//driver.changeLane();
 	}
 	
 

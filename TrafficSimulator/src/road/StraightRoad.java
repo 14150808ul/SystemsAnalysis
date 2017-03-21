@@ -33,7 +33,7 @@ public class StraightRoad extends Road{
 			//change x coordinate
 			double deltaX = tsf_Util.Formula.getDeltaDisplacement(eachDriver);
 			int carPosX = (int)( eachDriver.getX() + deltaX) ;
-			if(carPosX < 780 && carPosX >-150)
+			if(carPosX < 1000 && carPosX >-150)
 				eachDriver.setX((int)( eachDriver.getX() + deltaX) );
 			else
 				eachDriver.setX(-150);
