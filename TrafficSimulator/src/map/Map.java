@@ -50,7 +50,16 @@ public class Map implements Subject{
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
-		
+
+		Driver driver2 = new Driver(new Vehicle(310,0), new Behavior() {
+			@Override
+			public void drive() {
+				// TODO Auto-generated method stub
+			}
+		}, 400, 116, 2, 0);
+		driver2.setAcceleration(0.00);
+
+		road.addDriver( driver2 );
 		//driver.changeLane();
 	}
 	

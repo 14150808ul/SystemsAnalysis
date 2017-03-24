@@ -7,6 +7,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 import driver.Driver;
+import sense.Sense;
 
 public class StraightRoad extends Road{
 
@@ -60,6 +61,8 @@ public class StraightRoad extends Road{
 			
 			
 			eachDriver.setDuration_AfterChangeLane(eachDriver.getDuration_AfterChangeLane()+globalContract.TimeControl.TIME_UNIT);
+
+			System.out.println(Sense.getDistanceFromCarInFront(eachDriver, driver_list));
 		}
 	}	
 	
