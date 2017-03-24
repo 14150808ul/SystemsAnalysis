@@ -41,7 +41,7 @@ public class Map implements Subject{
 	***/
 	public void generateDriver(){		
 		//generate Driver in here! 
-		Driver driver = new Driver(new Vehicle(310,0), new Behavior() {
+		Driver driver = new Driver(new Vehicle(4.1,0), new Behavior() {
 			@Override
 			public void drive() {
 				// TODO Auto-generated method stub
@@ -51,15 +51,46 @@ public class Map implements Subject{
 		
 		road.addDriver( driver );
 
-		Driver driver2 = new Driver(new Vehicle(310,0), new Behavior() {
+		Driver driver2 = new Driver(new Vehicle(4,0), new Behavior() {
 			@Override
 			public void drive() {
 				// TODO Auto-generated method stub
 			}
-		}, 400, 116, 2, 0);
-		driver2.setAcceleration(0.00);
+		}, 200, 116, 3, 0);
+		driver2.setAcceleration(0);
 
 		road.addDriver( driver2 );
+
+		Driver driver3 = new Driver(new Vehicle(4.3,0), new Behavior() {
+			@Override
+			public void drive() {
+				// TODO Auto-generated method stub
+			}
+		},400, 116, 3, 0);
+		driver3.setAcceleration(0);
+
+		road.addDriver( driver3 );
+
+		Driver driver4 = new Driver(new Vehicle(4.1,0), new Behavior() {
+			@Override
+			public void drive() {
+				// TODO Auto-generated method stub
+			}
+		}, 600, 116, 3, 0);
+		driver4.setAcceleration(0);
+
+		road.addDriver( driver4 );
+
+
+		Driver driver5 = new Driver(new Vehicle(4.2,0), new Behavior() {
+			@Override
+			public void drive() {
+				// TODO Auto-generated method stub
+			}
+		}, 800, 116, 3, 0);
+		driver5.setAcceleration(0);
+
+		road.addDriver( driver5 );
 		//driver.changeLane();
 	}
 	

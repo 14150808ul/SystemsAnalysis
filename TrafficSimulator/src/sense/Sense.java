@@ -4,18 +4,17 @@ import driver.Driver;
 import java.util.ArrayList;
 
 public class Sense {
-
-    //Assumes cars are in order of position
     public static int getDistanceFromCarInFront(Driver driver, ArrayList<Driver> list) {
-        int index = list.indexOf(driver);
-        if(index != -1 && list.size() > index + 1){
-            Driver nextDriver = list.get(index + 1);
-            int distance = nextDriver.getX() - driver.getX();
-            if(distance > 0) {
-                return distance;
-            }
-        }
 
-        return -1;
+      int next_car_distance = -1;
+      for(int i = 0; i < list.size(); i++){
+          if(list.get(i).getX() > driver.getX()){
+              int distance = list.get(i).getX() - driver.getX();
+              if(distance < next_car_distance || next_car_distance == -1) {
+                  next_car_distance = distance;
+              }
+          }
+      }
+      return  next_car_distance;
     }
 }
