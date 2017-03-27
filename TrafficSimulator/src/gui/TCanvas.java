@@ -21,7 +21,7 @@ public class TCanvas extends Canvas {
 
     private Image background_image;
     private Image road_image;
-    private Image car_image;
+    private ArrayList<Image> car_images;
 
     private BufferStrategy buffer;
 
@@ -30,14 +30,20 @@ public class TCanvas extends Canvas {
         
         drivers = d;
 
+        car_images = new ArrayList<Image>();
         try { //Intellij
             background_image = ImageIO.read( new File(getClass().getResource("./images/backgroundGrass.jpg").getPath()));
             road_image = ImageIO.read(new File(getClass().getResource("./images/road.png").getPath()));
-            car_image = ImageIO.read(new File(getClass().getResource("./images/car-top-view.png").getPath()));
+            for(int i = 0; i < 9; i++){
+                car_images.add( ImageIO.read(new File(getClass().getResource("./images/car"+ i +".png").getPath())));
+            }
+
         } catch (NullPointerException e) { // default
             background_image = ImageIO.read( new File("./images/backgroundGrass.jpg"));
             road_image = ImageIO.read( new File("./images/road.png"));
-            car_image = ImageIO.read( new File("./images/car-top-view.png"));
+            for(int i = 0; i < 9; i++){
+                car_images.add( ImageIO.read(new File("./images/car"+ i +".png")));
+            }
         }
 
         setBackground(new Color(19, 124, 0));
@@ -56,7 +62,7 @@ public class TCanvas extends Canvas {
         g.drawImage(road_image, 0, 120, null);
 
         for( int i = 0; i < drivers.size(); i++ ) {
-          g.drawImage(car_image, drivers.get(i).getX(), drivers.get(i).getY(), null);
+          g.drawImage(car_images.get(i % 9), drivers.get(i).getX(), drivers.get(i).getY(), null);
         }
 
         buffer.show();

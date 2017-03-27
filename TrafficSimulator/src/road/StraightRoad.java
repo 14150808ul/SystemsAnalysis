@@ -6,17 +6,22 @@ import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
+import collision.Collision;
 import driver.Driver;
 import sense.Sense;
 
 public class StraightRoad extends Road{
+	int distance_from_car_in_front = (int)(Math.random() * 150) + 50;
+
 
 	public StraightRoad(){
+		System.out.print(distance_from_car_in_front);
 		roadDistance = 1000;
 		try {	roadImage = ImageIO.read(new File("resource/road.png"));	} catch (IOException e) {e.printStackTrace();}
 	}
 	
 	public StraightRoad(int laneDistance){
+		System.out.print(distance_from_car_in_front);
 		this.roadDistance = laneDistance;
 		try {	roadImage = ImageIO.read(new File("resource/road.png"));	} catch (IOException e) {e.printStackTrace();}
 	}
@@ -24,11 +29,15 @@ public class StraightRoad extends Road{
 	@Override
 	public void updateVehicles() {
 		// TODO Auto-generated method stub
-		//update each driver 
+		//update each driver
+		Collision collision = new Collision(driver_list);
+
+
+
 		for(Iterator<Driver> iterator = driver_list.iterator();
 			iterator.hasNext(); 
 				) {
-			Driver eachDriver = iterator.next();
+				Driver eachDriver = iterator.next();
 //change car's position
 				//change x coordinate
 				double deltaX = tsf_Util.Formula.getDeltaDisplacement(eachDriver);
@@ -62,15 +71,15 @@ public class StraightRoad extends Road{
 				eachDriver.setDuration_AfterChangeLane(eachDriver.getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
 
 				//System.out.println(Sense.getDistanceFromCarInFront(eachDriver, driver_list));
-				if (Sense.getDistanceFromCarInFront(eachDriver, driver_list) > 200 || Sense.getDistanceFromCarInFront(eachDriver, driver_list) == -1) {
-					eachDriver.setAcceleration(.02);
-				}
-				else if (Sense.getDistanceFromCarInFront(eachDriver, driver_list) < 100) {
-					eachDriver.setVelocity(0);
+				if (Sense.getDistanceFromCarInFront(eachDriver, driver_list) > distance_from_car_in_front || Sense.getDistanceFromCarInFront(eachDriver, driver_list) == -1) {
+					eachDriver.setAcceleration(.03);
 				}
 				else if (eachDriver.getVelocity() > 0) {
 					eachDriver.setAcceleration(-.01);
 				}
+
+				//System.out.println(eachDriver.getVehicle().getMax_speed());
+				collision.checkForCollision();
 
 			}
 		}

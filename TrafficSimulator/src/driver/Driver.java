@@ -1,5 +1,8 @@
 package driver;
+import jdk.nashorn.internal.scripts.JO;
 import vehicle.Vehicle;
+
+import javax.swing.*;
 
 public class Driver
 {
@@ -132,5 +135,10 @@ public class Driver
 	public void setEndLane(int endLane) {
 		this.endLane = endLane;
 	}
-    
+
+	public void crashed(){
+    	velocity = 0;
+    	acceleration = 0;
+		vehicle.setMax_speed(0);
+	}
 }
