@@ -80,11 +80,13 @@ public class Driver
 	}
 	
 	public void setVelocity(double velocity) {
-		double max_speed = this.vehicle.getMax_speed();
-		if(velocity < max_speed)
-			this.velocity = velocity;
-    	else
-	    	this.velocity = max_speed;
+		if(velocity > 0) {
+			double max_speed = this.vehicle.getMax_speed();
+			if (velocity < max_speed)
+				this.velocity = velocity;
+			else
+				this.velocity = max_speed;
+		}
 	}
 
 	public double getVelocity() {

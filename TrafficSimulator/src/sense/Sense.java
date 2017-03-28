@@ -7,6 +7,7 @@ public class Sense {
     public static int getDistanceFromCarInFront(Driver driver, ArrayList<Driver> list) {
 
       int next_car_distance = -1;
+      int min_car_x = -1;
       for(int i = 0; i < list.size(); i++){
           if(list.get(i).getX() > driver.getX()){
               int distance = list.get(i).getX() - driver.getX();
@@ -14,7 +15,19 @@ public class Sense {
                   next_car_distance = distance;
               }
           }
+          else{
+              int distance = list.get(i).getX() + (1000 - driver.getX());
+              if(distance < min_car_x || min_car_x == -1){
+                  min_car_x = distance + 95;
+              }
+          }
       }
-      return  next_car_distance;
+
+      if(next_car_distance != -1){
+          return next_car_distance;
+      }
+      else{
+          return min_car_x;
+      }
     }
 }

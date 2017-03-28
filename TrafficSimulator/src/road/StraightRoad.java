@@ -11,8 +11,7 @@ import driver.Driver;
 import sense.Sense;
 
 public class StraightRoad extends Road{
-	int distance_from_car_in_front = (int)(Math.random() * 150) + 50;
-
+	int distance_from_car_in_front = 158;
 
 	public StraightRoad(){
 		System.out.print(distance_from_car_in_front);
@@ -45,7 +44,7 @@ public class StraightRoad extends Road{
 				if (carPosX < 1000)
 					eachDriver.setX((int) (eachDriver.getX() + deltaX));
 				else
-					eachDriver.setX(-300);
+					eachDriver.setX(-95);
 				//System.out.println((int)(  deltaX));
 				//change car's volecity
 				double volecity = eachDriver.getVelocity();
@@ -72,10 +71,10 @@ public class StraightRoad extends Road{
 
 				//System.out.println(Sense.getDistanceFromCarInFront(eachDriver, driver_list));
 				if (Sense.getDistanceFromCarInFront(eachDriver, driver_list) > distance_from_car_in_front || Sense.getDistanceFromCarInFront(eachDriver, driver_list) == -1) {
-					eachDriver.setAcceleration(.03);
+					eachDriver.setAcceleration(.04);
 				}
-				else if (eachDriver.getVelocity() > 0) {
-					eachDriver.setAcceleration(-.01);
+				else {
+					eachDriver.setAcceleration(-.04);
 				}
 
 				//System.out.println(eachDriver.getVehicle().getMax_speed());
