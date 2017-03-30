@@ -42,7 +42,7 @@ public class Map implements Subject{
 	public void generateDriver(){		
 		//generate Driver in here! 
 		Driver driver = new Driver(new Vehicle((3),0),
-				new OldDriver(), 0, 100, 4, 0);
+				new OldDriver(), 0, 148, 4, 1);
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
