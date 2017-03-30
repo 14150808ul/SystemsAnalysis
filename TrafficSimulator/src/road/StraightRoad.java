@@ -11,17 +11,15 @@ import driver.Driver;
 import sense.Sense;
 
 public class StraightRoad extends Road{
-	int distance_from_car_in_front = 158;
 
 	public StraightRoad(){
-		System.out.print(distance_from_car_in_front);
+
 		roadDistance = 1000;
 		try {	roadImage = ImageIO.read(new File("resource/road.png"));	} catch (IOException e) {e.printStackTrace();}
 	}
 	
 	public StraightRoad(int laneDistance){
-		System.out.print(distance_from_car_in_front);
-		this.roadDistance = laneDistance;
+		roadDistance = laneDistance;
 		try {	roadImage = ImageIO.read(new File("resource/road.png"));	} catch (IOException e) {e.printStackTrace();}
 	}
 

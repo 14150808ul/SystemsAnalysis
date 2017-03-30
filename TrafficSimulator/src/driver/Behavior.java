@@ -3,6 +3,6 @@ package driver;
 
 public interface Behavior
 {
-	public int getPreferredDistance();
+	int getPreferredDistance();
     double getPreferredSpeed();
 }
