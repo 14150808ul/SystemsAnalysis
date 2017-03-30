@@ -41,58 +41,23 @@ public class Map implements Subject{
 	***/
 	public void generateDriver(){		
 		//generate Driver in here! 
-		Driver driver = new Driver(new Vehicle(((Math.random() * 1) + 4),0), new Behavior() {
-			@Override
-			public void drive() {
-				// TODO Auto-generated method stub
-			}
-		}, 0, 100, 4, 0);
+		Driver driver = new Driver(new Vehicle((3),0),
+				new AverageDriver(), 0, 100, 4, 0);
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
 
-		Driver driver2 = new Driver(new Vehicle((Math.random() * 1 + 4),0), new Behavior() {
-			@Override
-			public void drive() {
-				// TODO Auto-generated method stub
-			}
-		}, 200, 100, 3, 0);
+		Driver driver2 = new Driver(new Vehicle((4),0),
+				new AverageDriver(), 200, 100, 4, 0);
 		driver2.setAcceleration(0);
 
 		road.addDriver( driver2 );
 
-		Driver driver3 = new Driver(new Vehicle(((Math.random() * 1) + 4),0), new Behavior() {
-			@Override
-			public void drive() {
-				// TODO Auto-generated method stub
-			}
-		},400, 100, 3, 0);
+		Driver driver3 = new Driver(new Vehicle((5),0),
+				new AverageDriver(), 400, 100, 4, 0);
 		driver3.setAcceleration(0);
 
 		road.addDriver( driver3 );
-
-		Driver driver4 = new Driver(new Vehicle(((Math.random() * 1) + 4),0), new Behavior() {
-			@Override
-			public void drive() {
-				// TODO Auto-generated method stub
-			}
-		}, 600, 100, 3, 0);
-		driver4.setAcceleration(0);
-
-		road.addDriver( driver4 );
-
-
-		Driver driver5 = new Driver(new Vehicle((Math.random() * 1 + 4),0), new Behavior() {
-			@Override
-			public void drive() {
-				// TODO Auto-generated method stub
-			}
-		}, 800, 100, 3, 0);
-		driver5.setAcceleration(0);
-
-		road.addDriver( driver5 );
-
-		//driver.changeLane();
 	}
 	
 

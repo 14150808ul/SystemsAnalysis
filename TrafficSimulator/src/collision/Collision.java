@@ -23,8 +23,8 @@ public class Collision { //Could use Observer Pattern
     private void checkCollision(int i, int j){
         Driver d1 = drivers.get(i);
         Driver d2 = drivers.get(j);
-        Rectangle r1 = new Rectangle(d1.getX(), d1.getY(), 90, 50);
-        Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), 90, 50);
+        Rectangle r1 = new Rectangle(d1.getX(), d1.getY(), 85, 50);
+        Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), 85, 50);
 
         if(r1.intersects(r2)){
 d1.crashed();
