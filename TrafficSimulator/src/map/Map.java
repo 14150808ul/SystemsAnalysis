@@ -42,18 +42,18 @@ public class Map implements Subject{
 	public void generateDriver(){		
 		//generate Driver in here! 
 		Driver driver = new Driver(new Vehicle((3),0),
-				new AverageDriver(), 0, 100, 4, 0);
+				new OldDriver(), 0, 100, 4, 0);
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
 
 		Driver driver2 = new Driver(new Vehicle((4),0),
-				new AverageDriver(), 200, 100, 4, 0);
+				new OldDriver(), 200, 100, 4, 0);
 		driver2.setAcceleration(0);
 
 		road.addDriver( driver2 );
 
-		Driver driver3 = new Driver(new Vehicle((5),0),
+		Driver driver3 = new Driver(new Vehicle((4),0),
 				new AverageDriver(), 400, 100, 4, 0);
 		driver3.setAcceleration(0);
 

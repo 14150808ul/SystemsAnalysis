@@ -11,4 +11,8 @@ public class OldDriver implements Behavior {
     public double getPreferredSpeed(){
         return 2;
     }
+
+    public boolean likesToChangeLane(){
+        return false;
+    }
 }

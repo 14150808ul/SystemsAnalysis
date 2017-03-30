@@ -35,6 +35,7 @@ public class Driver {
 	}
 
 	public void changeLane() {
+		System.out.println("changing lanes ...");
 		this.setChangingLane(true);
 	}
 
@@ -176,6 +177,9 @@ public class Driver {
 		}
 		else {
 			setAcceleration(-.02);
+			if(behavior.likesToChangeLane()){
+				changeLane();
+			}
 		}
 
 		//System.out.println(eachDriver.getVehicle().getMax_speed());

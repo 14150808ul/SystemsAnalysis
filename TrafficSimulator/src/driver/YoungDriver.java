@@ -13,4 +13,7 @@ public class YoungDriver implements Behavior {
         return 10;
     }
 
+    public boolean likesToChangeLane(){
+        return true;
+    }
 }
