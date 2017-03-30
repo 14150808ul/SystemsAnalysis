@@ -58,6 +58,12 @@ public class Map implements Subject{
 		driver3.setAcceleration(0);
 
 		road.addDriver( driver3 );
+
+		Driver driver4 = new Driver(new Vehicle((4),0),
+				new YoungDriver(), 800, 148, 4, 1);
+		driver4.setAcceleration(0);
+
+		road.addDriver( driver4 );
 	}
 	
 
