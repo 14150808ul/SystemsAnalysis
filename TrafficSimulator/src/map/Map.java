@@ -42,9 +42,11 @@ public class Map implements Subject{
 	** 				This method should be allocated into a interface which used to polymorphismly generate cars
 	***/
 	public void generateDriver(){		
-		//generate Driver in here! 
-		Driver driver = new Driver(new Vehicle((3),0, 1),
-				new OldDriver(), 0, 148, 4, 1);
+		//generate Driver in here!
+		//Should create DriverFactory that takes in two numbers and returns a driver object
+
+		Driver driver = new Driver(new Vehicle((3),0, 0),
+				new YoungDriver(), 0, 148, 4, 1);
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
@@ -62,7 +64,7 @@ public class Map implements Subject{
 		road.addDriver( driver3 );
 
 		Driver driver4 = new Driver(new Car(),
-				new YoungDriver(), 800, 148, 4, 1);
+				new OldDriver(), 600, 148, 4, 1);
 		driver4.setAcceleration(0);
 
 		road.addDriver( driver4 );

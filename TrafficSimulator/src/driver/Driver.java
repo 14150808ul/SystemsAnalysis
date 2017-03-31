@@ -9,6 +9,7 @@ public class Driver {
 	private int x;
 	private int y;
 
+	private boolean crashed;
 
 	private int startLane = 0;            // important atttribute to change lane
 	private int endLane = 1;
@@ -32,6 +33,7 @@ public class Driver {
 		this.velocity = velocity;
 		//this.startLane = this.endLane = lane;
 		this.duration_AfterChangeLane = 0;
+		this.crashed = false;
 	}
 
 	public void changeLane() {
@@ -138,6 +140,11 @@ public class Driver {
 		velocity = 0;
 		acceleration = 0;
 		vehicle.setMax_speed(0);
+		crashed = true;
+	}
+
+	public boolean isCrashed(){
+		return crashed;
 	}
 
 	public void drive(int distance_from_car_in_front) {

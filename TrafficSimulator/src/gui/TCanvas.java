@@ -22,6 +22,7 @@ public class TCanvas extends Canvas {
     private Image background_image;
     private Image road_image;
     private ArrayList<Image> car_images;
+    private ArrayList<Image> car_images_crashed;
 
     private BufferStrategy buffer;
 
@@ -30,19 +31,22 @@ public class TCanvas extends Canvas {
         
         drivers = d;
 
+        car_images_crashed = new ArrayList<Image>();
         car_images = new ArrayList<Image>();
         try { //Intellij
             background_image = ImageIO.read( new File(getClass().getResource("./images/backgroundGrass.jpg").getPath()));
             road_image = ImageIO.read(new File(getClass().getResource("./images/road.png").getPath()));
-            for(int i = 0; i < 9; i++){
+            for(int i = 0; i < 3; i++){
                 car_images.add( ImageIO.read(new File(getClass().getResource("./images/car"+ i +".png").getPath())));
+                car_images_crashed.add( ImageIO.read(new File(getClass().getResource("./images/car"+ i +"_crashed.png").getPath())));
             }
 
         } catch (NullPointerException e) { // default
             background_image = ImageIO.read( new File("./images/backgroundGrass.jpg"));
             road_image = ImageIO.read( new File("./images/road.png"));
-            for(int i = 0; i < 9; i++){
+            for(int i = 0; i < 3; i++){
                 car_images.add( ImageIO.read(new File("./images/car"+ i +".png")));
+                car_images_crashed.add( ImageIO.read(new File("./images/car"+ i +"_crashed.png")));
             }
         }
 
@@ -63,7 +67,12 @@ public class TCanvas extends Canvas {
 
         for( int i = 0; i < drivers.size(); i++ ) {
             int pic = drivers.get(i).getVehicle().getCar_image();
-          g.drawImage(car_images.get(pic), drivers.get(i).getX(), drivers.get(i).getY(), null);
+            if(drivers.get(i).isCrashed()){
+                g.drawImage(car_images_crashed.get(pic), drivers.get(i).getX(), drivers.get(i).getY(), null);
+            }
+            else {
+                g.drawImage(car_images.get(pic), drivers.get(i).getX(), drivers.get(i).getY(), null);
+            }
         }
 
         buffer.show();

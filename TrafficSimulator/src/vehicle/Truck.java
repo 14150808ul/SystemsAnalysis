@@ -5,6 +5,6 @@ public class Truck extends Vehicle{
 
 	public Truck()
 	{
-		super(3, 1, 7);
+		super(3, 1, 0);
 	}
 }
