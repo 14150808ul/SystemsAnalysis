@@ -1,6 +1,4 @@
 package vehicle;
-import javax.imageio.ImageIO;
-import java.awt.Image; 
 
 //Generic vehicle at the moment, later on make it abstract
 public class Vehicle

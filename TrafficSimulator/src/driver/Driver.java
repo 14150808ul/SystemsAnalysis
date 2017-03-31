@@ -9,9 +9,9 @@ public class Driver {
 	private int x;
 	private int y;
 
-	private boolean crashed;
+	private boolean crashed; //robert crash
 
-	private int startLane = 0;            // important atttribute to change lane
+	private int startLane = 0;            // important attribute to change lane
 	private int endLane = 1;
 	private double duration_AfterChangeLane = 0;//############!!!!!!!!!!!!!!!!!!!!
 
@@ -20,7 +20,7 @@ public class Driver {
 	private double velocity_changeLane = 0;
 	protected int changeLaneDuration = 1000	/*millisecond*/;
 	protected int responseTime = 10;            //When the collision occured, the time to react/brake.
-	//	& when the car in front of it begain to drive, the response time to start off.
+	//	& when the car in front of it begin to drive, the response time to start off.
 	protected int accelerationGradient = 1;   //boy rider's G(acc) bigger than the elder's G(acc): G(acc) is the rate of change of the acceleration.(acceleration is the rate of change of the volecity)
 	protected double overtakingProbability = 1.0;
 
@@ -156,7 +156,7 @@ public class Driver {
 
 
 
-		double deltaVolecity = 0;
+		double deltaVelocity = 0;
 		if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
 			double acc = getAcceleration();
 			if (acc > 0)
@@ -165,8 +165,8 @@ public class Driver {
 		if (velocity <= -2) {
 			setAcceleration(0);
 		}
-		deltaVolecity = tsf_Util.Formula.getDeltaVolecity(this);
-		setVelocity(velocity + deltaVolecity);
+		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
+		setVelocity(velocity + deltaVelocity);
 		// !!NOTICE: The Car's position should be updated firstly.
 
 		//change y coordinate

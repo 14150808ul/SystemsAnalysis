@@ -2,8 +2,6 @@ package driver;
 
 public class AverageDriver implements Behavior {
 
-    public int changeLaneDuration = 8000;
-
     public int getPreferredDistance(){
         return 180;
     }
