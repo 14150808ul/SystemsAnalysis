@@ -37,7 +37,6 @@ public class Driver {
 	}
 
 	public void changeLane() {
-		System.out.println("changing lanes ...");
 		this.setChangingLane(true);
 	}
 

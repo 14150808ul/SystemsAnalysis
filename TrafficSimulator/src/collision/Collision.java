@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Collision { //Could use Observer Pattern
     private ArrayList<Driver> drivers;
 
+    private static int crash_counter = 0;
+
    public Collision(ArrayList<Driver> d){
         drivers = d;
     }
@@ -30,6 +32,8 @@ public class Collision { //Could use Observer Pattern
             Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), 85, 40);
 
             if (r1.intersects(r2)) {
+                crash_counter ++;
+                System.out.println("Crashes: " + crash_counter);
                 d1.crashed();
                 d2.crashed();
             }
