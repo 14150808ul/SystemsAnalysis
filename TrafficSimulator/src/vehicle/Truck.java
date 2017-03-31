@@ -3,8 +3,8 @@ package vehicle;
 
 public class Truck extends Vehicle{
 
-	public Truck(double max_speed, double acceleration)
+	public Truck()
 	{
-		super(max_speed, acceleration);
+		super(3, 1, 7);
 	}
 }

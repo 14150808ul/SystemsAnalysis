@@ -9,6 +9,8 @@ import driver.Driver;
 import pattern.*;
 import road.Road; 
 import road.StraightRoad;
+import vehicle.Car;
+import vehicle.Truck;
 import vehicle.Vehicle;
   
 import driver.*;
@@ -41,25 +43,25 @@ public class Map implements Subject{
 	***/
 	public void generateDriver(){		
 		//generate Driver in here! 
-		Driver driver = new Driver(new Vehicle((3),0),
+		Driver driver = new Driver(new Vehicle((3),0, 1),
 				new OldDriver(), 0, 148, 4, 1);
 		driver.setAcceleration(0.00);
 		
 		road.addDriver( driver );
 
-		Driver driver2 = new Driver(new Vehicle((4),0),
+		Driver driver2 = new Driver(new Car(),
 				new OldDriver(), 200, 100, 4, 0);
 		driver2.setAcceleration(0);
 
 		road.addDriver( driver2 );
 
-		Driver driver3 = new Driver(new Vehicle((4),0),
+		Driver driver3 = new Driver(new Truck(),
 				new AverageDriver(), 400, 100, 4, 0);
 		driver3.setAcceleration(0);
 
 		road.addDriver( driver3 );
 
-		Driver driver4 = new Driver(new Vehicle((4),0),
+		Driver driver4 = new Driver(new Car(),
 				new YoungDriver(), 800, 148, 4, 1);
 		driver4.setAcceleration(0);
 

@@ -7,12 +7,13 @@ public class Vehicle
 {
     private double max_speed; //max speed
     private double max_acceleration; //change of speed;
-    private static Image car_image;
+    private int car_image;
 
-    public Vehicle(double max_speed, double max_acceleration)
+    public Vehicle(double max_speed, double max_acceleration, int car_image)
     {
         this.max_speed = max_speed;
-        this.max_acceleration = max_acceleration ;
+        this.max_acceleration = max_acceleration;
+        this.car_image = car_image;
     }
     
     //max speed of car
@@ -29,7 +30,7 @@ public class Vehicle
         this.max_acceleration  = max_acceleration ;
     }
 
-    public Image getCar_image() {
+    public int getCar_image() {
         return car_image;
     }
 
