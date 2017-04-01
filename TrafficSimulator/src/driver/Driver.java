@@ -1,4 +1,5 @@
 package driver;
+import road.Road;
 import vehicle.Vehicle;
 
 public class Driver {
@@ -11,33 +12,35 @@ public class Driver {
 
 	private boolean crashed; //robert crash
 
-	private int startLane = 0;            // important attribute to change lane
-	private int endLane = 1;
-	private double duration_AfterChangeLane = 0;//############!!!!!!!!!!!!!!!!!!!!
+	private int startLane ; // important attribute to change lane
+	private int endLane ; 
+	private double duration_AfterChangeLane = 0;
 
 	private boolean isChangingLane = false;
-	public double laneChangeAll = 0;//used to tested for tsf_Util.formula
 	private double velocity_changeLane = 0;
+	
 	protected int changeLaneDuration = 1000	/*millisecond*/;
 	protected int responseTime = 10;            //When the collision occured, the time to react/brake.
 	//	& when the car in front of it begin to drive, the response time to start off.
-	protected int accelerationGradient = 1;   //boy rider's G(acc) bigger than the elder's G(acc): G(acc) is the rate of change of the acceleration.(acceleration is the rate of change of the volecity)
+	
 	protected double overtakingProbability = 1.0;
 
 
-	public Driver(Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int lane) {
+	public Driver(Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
 		this.vehicle = vehicle;
 		this.behavior = behavior;
 		this.x = x;
 		this.y = y;
 		this.velocity = velocity;
-		//this.startLane = this.endLane = lane;
+		this.startLane = startlane;
+		this.endLane = ( startlane == Road.leftLane ? Road.rightLane : Road.leftLane);
+		this.isChangingLane = false;
 		this.duration_AfterChangeLane = 0;
 		this.crashed = false;
 	}
 
 	public void changeLane() {
-		this.setChangingLane(true);
+		this.isChangingLane = true ;
 	}
 
 	public boolean isChangingLane() {
@@ -103,7 +106,11 @@ public class Driver {
 	}
 
 	public void setAcceleration(double acceleration) {
-		this.acceleration = acceleration;
+		double max_acc = this.vehicle.getMax_acceleration();
+		if (acceleration <= max_acc)
+			this.acceleration =  acceleration;
+		else
+			this.acceleration = max_acc;
 	}
 
 	//can change its behavior at runtime maybe? shouldn't br able to get it I think
@@ -145,7 +152,7 @@ public class Driver {
 	public boolean isCrashed(){
 		return crashed;
 	}
-
+	
 	public void drive(int distance_from_car_in_front) {
 		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
 		int carPosX = (int) (x + deltaX);
@@ -154,16 +161,11 @@ public class Driver {
 		else
 			setX(-95);
 
-
-
 		double deltaVelocity = 0;
 		if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
 			double acc = getAcceleration();
 			if (acc > 0)
 				setAcceleration(getAcceleration() * -1);
-		}
-		if (velocity <= -2) {
-			setAcceleration(0);
 		}
 		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
 		setVelocity(velocity + deltaVelocity);
@@ -171,25 +173,21 @@ public class Driver {
 
 		//change y coordinate
 		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-		setY((int) (getY() + deltaY));
-
-
-		setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
-
-		//System.out.println(Sense.getDistanceFromCarInFront(eachDriver, driver_list));
-
+		setY( (int) ( getY() +  deltaY) );
+	
+		
+		
+		if(this.isChangingLane){ 
+			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
+		} 
 		if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
-			setAcceleration(.04);
+			setAcceleration(behavior.getPreferredAcc());
 		}
 		else {
-			setAcceleration(-.02);
+			setAcceleration(behavior.getPreferredDcc());
 			if(behavior.likesToChangeLane()){
 				changeLane();
 			}
 		}
-
-		//System.out.println(eachDriver.getVehicle().getMax_speed());
-
-
 	}
 }

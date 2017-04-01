@@ -1,6 +1,8 @@
 package sense;
 
 import driver.Driver;
+import gui.TWindow;
+
 import java.util.ArrayList;
 
 public class Sense {
@@ -8,6 +10,7 @@ public class Sense {
 
       int next_car_distance = -1;
       int min_car_x = -1;
+      
       for(int i = 0; i < list.size(); i++){
 
           if(list.get(i).getY() == driver.getY() ) {
@@ -18,9 +21,9 @@ public class Sense {
                       next_car_distance = distance;
                   }
               } else {
-                  int distance = list.get(i).getX() + (1000 - driver.getX());
+                  int distance = list.get(i).getX() + (TWindow.WINDOW_LENGTH - driver.getX());
                   if (distance < min_car_x || min_car_x == -1) {
-                      min_car_x = distance + 95;
+                      min_car_x = distance /*+ 95*/; // why plus 95 here?
                   }
               }
           }
@@ -32,5 +35,6 @@ public class Sense {
       else{
           return min_car_x;
       }
+      
     }
 }

@@ -28,9 +28,7 @@ public class TCanvas extends Canvas {
 
     ArrayList<Driver> drivers;
     TCanvas(ArrayList<Driver> d) throws IOException{
-        
         drivers = d;
-
         car_images_crashed = new ArrayList<Image>();
         car_images = new ArrayList<Image>();
         try { //Intellij
@@ -49,7 +47,6 @@ public class TCanvas extends Canvas {
                 car_images_crashed.add( ImageIO.read(new File("./images/car"+ i +"_crashed.png")));
             }
         }
-
         setBackground(new Color(19, 124, 0));
     }
 

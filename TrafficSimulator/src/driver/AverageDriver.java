@@ -3,7 +3,7 @@ package driver;
 public class AverageDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 180;
+        return 60;
     }
 
     public double getPreferredSpeed(){
@@ -13,4 +13,15 @@ public class AverageDriver implements Behavior {
     public boolean likesToChangeLane(){
         return true;
     }
+
+	@Override
+	public double getPreferredAcc() {
+		return 0.2;
+	}
+
+	@Override
+	public double getPreferredDcc() {
+		return 0.2;
+	}
+    
 }

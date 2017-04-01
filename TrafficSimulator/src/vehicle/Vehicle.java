@@ -6,6 +6,8 @@ public class Vehicle
     private double max_speed; //max speed
     private double max_acceleration; //change of speed;
     private int car_image;
+    public static final int width  = 40;
+    public static final int length = 85;
 
     public Vehicle(double max_speed, double max_acceleration, int car_image)
     {
@@ -13,8 +15,12 @@ public class Vehicle
         this.max_acceleration = max_acceleration;
         this.car_image = car_image;
     }
-    
-    //max speed of car
+
+	public void setCar_image(int car_image) {
+		this.car_image = car_image;
+	}
+
+	//max speed of car
     public double getMax_speed() {
         return max_speed;
     }
