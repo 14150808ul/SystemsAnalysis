@@ -4,7 +4,7 @@ package driver;
 public class YoungDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 25;
+        return 125;
     }
 
     public double getPreferredSpeed(){

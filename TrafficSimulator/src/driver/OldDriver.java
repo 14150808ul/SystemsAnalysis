@@ -3,7 +3,7 @@ package driver;
 public class OldDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 100;
+        return 300;
     }
 
     public double getPreferredSpeed(){

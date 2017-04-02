@@ -3,11 +3,14 @@
 //Traffic Simulator
 //TWindow.java
 package gui;
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
 import java.io.IOException;
-import java.awt.Graphics;
+
 import pattern.Observer;
 import pattern.Subject;
+import statistics.StatsSubject;
 
 public class TWindow extends JFrame implements Observer {
 
@@ -16,7 +19,9 @@ public class TWindow extends JFrame implements Observer {
     public static final int WINDOW_LENGTH = 1000;
     
     private TCanvas canvas;
-    public TWindow(Subject subject) throws IOException {
+    private TStatsBar statsBar;
+
+    public TWindow(Subject subject, StatsSubject statsSubject) throws IOException {
 
         super("Traffic Simulator");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,6 +30,14 @@ public class TWindow extends JFrame implements Observer {
 
         this.subject = subject;
         this.subject.attach(this);
+
+        setLayout(new BorderLayout());
+
+        statsBar = new TStatsBar(statsSubject);
+        statsBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        this.add(statsBar, BorderLayout.SOUTH);
+        statsBar.setPreferredSize(new Dimension(this.getWidth(), 20));
+        statsBar.setLayout(new BoxLayout(statsBar, BoxLayout.X_AXIS));
 
         canvas = new TCanvas(subject.getDriverAll());
         this.add(canvas);

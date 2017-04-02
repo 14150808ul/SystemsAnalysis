@@ -23,7 +23,7 @@ public class Sense {
               } else {
                   int distance = list.get(i).getX() + (TWindow.WINDOW_LENGTH - driver.getX());
                   if (distance < min_car_x || min_car_x == -1) {
-                      min_car_x = distance /*+ 95*/; // why plus 95 here?
+                      min_car_x = distance + 95;
                   }
               }
           }
@@ -35,6 +35,5 @@ public class Sense {
       else{
           return min_car_x;
       }
-      
     }
 }
