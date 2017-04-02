@@ -2,12 +2,14 @@ package road;
  
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
 import collision.Collision;
 import driver.Driver;
+import pattern.Observer;
 import sense.Sense;
 
 public class StraightRoad extends Road{
@@ -33,5 +35,6 @@ public class StraightRoad extends Road{
 				collision.checkForCollision();
 			}
 		}
+
 	
 }
