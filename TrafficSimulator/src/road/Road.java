@@ -6,7 +6,7 @@ package road;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import driver.Driver;
+import driver.Driver; 
 
 public abstract class Road {
 	protected int laneNum;	// if(laneNum = 2) the inner lane = 1, the outer lane is 0;
@@ -14,8 +14,8 @@ public abstract class Road {
 	protected ArrayList<Driver> driver_list ;
 	public static final double width = 60; // pix.
 	
-	public static final int leftLane = 1;
-	public static final int rightLane = 0;
+	public static final int leftLane = 0;
+	public static final int rightLane = 1;
 	public abstract void updateVehicles();
 	
 	
@@ -60,3 +60,4 @@ public abstract class Road {
 	}
 	
 }
+
