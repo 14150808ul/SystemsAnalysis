@@ -2,13 +2,13 @@ package driver;
 import road.Road;
 import vehicle.Vehicle;
 
-public class Driver {
+public class Driver  {
 	private Vehicle vehicle;
 	private Behavior behavior;    //this is an interface or abstract class not sure yet
 	private double velocity;    //current speed and direction
 	private double acceleration;//current acceleration
 	private int x;
-	private int y;
+	private double y;	//this attribute must be double -> for it is the very little change of lane change displacement.
 
 	private boolean crashed; //robert crash
 
@@ -18,7 +18,7 @@ public class Driver {
 
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	
+	public double all = 0; // test
 	protected int changeLaneDuration = 1000	/*millisecond*/;
 	protected int responseTime = 10;            //When the collision occured, the time to react/brake.
 	//	& when the car in front of it begin to drive, the response time to start off.
@@ -68,10 +68,10 @@ public class Driver {
 	}
 
 	public int getY() {
-		return y;
+		return  (int) Math.round(y); // 2.3 return 2; while 2.5 return 3 -> without this cannot change lane.
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 
@@ -173,10 +173,9 @@ public class Driver {
 
 		//change y coordinate
 		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-		setY( (int) ( getY() +  deltaY) );
-	
-		
-		
+		//here must use this.y , cannot use getY(). otherwise cannot change lane.
+		setY(  this.y +  deltaY );  
+
 		if(this.isChangingLane){ 
 			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
 		} 
@@ -190,4 +189,5 @@ public class Driver {
 			}
 		}
 	}
+ 
 }
