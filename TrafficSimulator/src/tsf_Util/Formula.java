@@ -27,14 +27,13 @@ public class Formula {
 		if( !driver.isChangingLane() ){
 			return 0;
 		}
-		double width_LaneChange =  Road.width ; 
+		double width_LaneChange =  Road.width * 4; 
 		double dt_afterCL = driver.getDuration_AfterChangeLane();
 		int laneEnd = driver.getEndLane();	 
 		int laneStart = driver.getStartLane();
 		double T = driver.getDurationLaneChange(); 
 		double 	acc_ChangeLane = 0;
 		int direction  = laneEnd - laneStart;
-		
 		if(dt_afterCL < 0.5 * T){
 			acc_ChangeLane = 4*width_LaneChange/(T * T);
 		}
@@ -43,17 +42,31 @@ public class Formula {
 			acc_ChangeLane = -4*width_LaneChange/(T * T);
 		}
 		else{
+			//just used for testing
+			//System.out.println("Before lane change:");
+			//System.out.println("Endlane = "+ driver.getEndLane());
+			//System.out.println("laneStart = "+ driver.getStartLane());
+			
 			driver.setDuration_AfterChangeLane(0);
 			driver.setStartLane(laneEnd);
 			driver.setEndLane(laneStart);
 			driver.setChangingLane(false);
+			
+			//just used for testing
+			//System.out.println("AFTER lane change:");
+			//System.out.println("Endlane = "+ driver.getEndLane());
+			//System.out.println("laneStart = "+ driver.getStartLane());
+			
 		}
-		double dt = globalContract.TimeControl.TIME_UNIT  * globalContract.TimeControl.TIME_UNIT /* globalContract.ScaleControl.TIME_ScaleRatio */;//why Time 5 I also do not know...
-		
+		double dt =   globalContract.TimeControl.TIME_UNIT /* globalContract.ScaleControl.TIME_ScaleRatio */;//why Time 5 I also do not know...
 		double v_LC = driver.getVelocity_changeLane();
 		double deltaDisplacement_LaneChange = acc_ChangeLane*dt*dt/2 + v_LC * globalContract.TimeControl.TIME_UNIT;
- 
 		driver.setVelocity_changeLane(  (dt_afterCL >= T) ?  0 : acc_ChangeLane + v_LC );
+		driver.all += deltaDisplacement_LaneChange * direction;
+		
+		//just used for testing
+		//System.out.println(driver.all);
+		
 		return  deltaDisplacement_LaneChange * direction;
 	}
 
