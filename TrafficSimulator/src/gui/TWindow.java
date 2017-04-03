@@ -39,6 +39,8 @@ public class TWindow extends JFrame implements Observer {
         statsBar.setPreferredSize(new Dimension(this.getWidth(), 20));
         statsBar.setLayout(new BoxLayout(statsBar, BoxLayout.X_AXIS));
 
+        statsBar.startTimer();
+
         canvas = new TCanvas(subject.getDriverAll());
         this.add(canvas);
         setVisible(true);

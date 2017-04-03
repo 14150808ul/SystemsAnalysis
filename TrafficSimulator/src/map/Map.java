@@ -70,6 +70,9 @@ public class Map implements Subject{
 		driver4.setAcceleration(0);
 
 		road.addDriver( driver4 );
+
+		//Hard code for now
+		statistics.setNumber_of_cars(4);
 	}
 	
 	@Override
