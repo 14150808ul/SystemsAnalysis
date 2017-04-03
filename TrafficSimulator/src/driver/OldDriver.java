@@ -21,7 +21,11 @@ public class OldDriver implements Behavior {
 
 	@Override
 	public double getPreferredDcc() {
-		return 0.8;
+		return -0.2;
 	}
-    
+
+    @Override
+    public int getOvertakingGap() {
+        return 300;
+    }
 }

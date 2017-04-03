@@ -153,7 +153,7 @@ public class Driver  {
 		return crashed;
 	}
 	
-	public void drive(int distance_from_car_in_front) {
+	public void drive(int distance_from_car_in_front, boolean can_change_lane) {
 		if(!crashed) {
 			double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
 			int carPosX = (int) (x + deltaX);
@@ -184,11 +184,15 @@ public class Driver  {
 				setAcceleration(behavior.getPreferredAcc());
 			} else {
 				setAcceleration(behavior.getPreferredDcc());
-				if (behavior.likesToChangeLane()) {
+				if (behavior.likesToChangeLane() && can_change_lane) {
 					changeLane();
 				}
 			}
 		}
+	}
+
+	public int getOvertakingGap() {
+		return behavior.getOvertakingGap();
 	}
  
 }

@@ -22,7 +22,11 @@ public class YoungDriver implements Behavior {
 
 	@Override
 	public double getPreferredDcc() {
-		return 0.5;
+		return -0.5;
 	}
-    
+
+    @Override
+    public int getOvertakingGap() {
+        return 100;
+    }
 }

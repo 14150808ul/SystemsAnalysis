@@ -21,7 +21,11 @@ public class AverageDriver implements Behavior {
 
 	@Override
 	public double getPreferredDcc() {
-		return 0.2;
+		return -0.2;
 	}
-    
+
+    @Override
+    public int getOvertakingGap() {
+        return 200;
+    }
 }

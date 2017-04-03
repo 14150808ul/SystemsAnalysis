@@ -36,7 +36,8 @@ public class StraightRoad extends Road{
 			iterator.hasNext(); 
 				) {
 				Driver eachDriver = iterator.next();
-				eachDriver.drive( Sense.getDistanceFromCarInFront(eachDriver, driver_list) );
+				eachDriver.drive( Sense.getDistanceFromCarInFront(eachDriver, driver_list) ,
+						          Sense.canChangeLane(eachDriver, driver_list, eachDriver.getOvertakingGap() ));
 				collision.checkForCollision();
 			}
 		}

@@ -59,14 +59,14 @@ public class Map implements Subject{
 
 		road.addDriver( driver2 );
 
-		Driver driver3 = new Driver(new Truck(),
-				new AverageDriver(), 400, 100, 4, 0);
+		Driver driver3 = new Driver(new Car(),
+				new YoungDriver(), 400, 100, 4, 0);
 		driver3.setAcceleration(0);
 
 		road.addDriver( driver3 );
 
 		Driver driver4 = new Driver(new Car(),
-				new AverageDriver(), 600, 148, 4, 0);
+				new AverageDriver(), 0, 148, 4, 1);
 		driver4.setAcceleration(0);
 
 		road.addDriver( driver4 );
