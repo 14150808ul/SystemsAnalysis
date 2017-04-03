@@ -8,7 +8,7 @@ public class Statistics implements StatsSubject{
 
     public Statistics(){
         observers = new ArrayList<>();
-        number_of_crashes = 1;
+        number_of_crashes = 0;
 
     }
 
@@ -30,5 +30,6 @@ public class Statistics implements StatsSubject{
 
     public void setNumber_of_crashes(int num){
         number_of_crashes = num;
+        notifyObservers();
     }
 }

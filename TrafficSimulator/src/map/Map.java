@@ -8,6 +8,8 @@ import javax.swing.Timer;
 import pattern.*;
 import road.Road; 
 import road.StraightRoad;
+import statistics.Statistics;
+import statistics.StatsSubject;
 import vehicle.Car;
 import vehicle.Truck;
 import vehicle.Vehicle;
@@ -18,9 +20,12 @@ public class Map implements Subject{
 
 	private Road road;
 	private Timer timer;
+
+	private StatsSubject statistics;
 	
-	public Map(){
-		road = new StraightRoad();
+	public Map(StatsSubject statistics){
+		this.statistics = statistics;
+		road = new StraightRoad(statistics);
 		generateDriver();
 		timer = new Timer(globalContract.TimeControl.TIME_UNIT, new ActionListener() {
 			@Override

@@ -1,6 +1,7 @@
 package collision;
 
 import driver.Driver;
+import statistics.StatsSubject;
 import vehicle.Vehicle;
  
 import java.awt.*;   
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 
 public class Collision { //Could use Observer Pattern
     private ArrayList<Driver> drivers;
-
-    private static int crash_counter = 0;
+    private StatsSubject statsSubject;
     
-   public Collision(ArrayList<Driver> d){
+   public Collision(ArrayList<Driver> d, StatsSubject statsSubject){
+       this.statsSubject = statsSubject;
         drivers = d;
     }
 
@@ -36,18 +37,11 @@ public class Collision { //Could use Observer Pattern
             Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), Vehicle.length , Vehicle.width  );
 
             if (r1.intersects(r2)) {
-                crash_counter ++;
-                System.out.println("Crashes: " + crash_counter);
+                statsSubject.setNumber_of_crashes(statsSubject.getNumber_of_crashes() + 1);
                 d1.crashed();
-                d2.crashed(); 
-                
-                // please play a piece of music here if you can.
-                // source file in "..\\..\\resource\\crashSound.[wav|mp3]"
-                
+                d2.crashed();
             }            
-        }     
-        
-        
+        }
     }
  
 }

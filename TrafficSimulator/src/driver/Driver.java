@@ -154,38 +154,39 @@ public class Driver  {
 	}
 	
 	public void drive(int distance_from_car_in_front) {
-		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
-		int carPosX = (int) (x + deltaX);
-		if (carPosX < 1000)
-			setX((int) (getX() + deltaX));
-		else
-			setX(-95);
+		if(!crashed) {
+			double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
+			int carPosX = (int) (x + deltaX);
+			if (carPosX < 1000)
+				setX((int) (getX() + deltaX));
+			else
+				setX(-95);
 
-		double deltaVelocity = 0;
-		if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
-			double acc = getAcceleration();
-			if (acc > 0)
-				setAcceleration(getAcceleration() * -1);
-		}
-		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
-		setVelocity(velocity + deltaVelocity);
-		// !!NOTICE: The Car's position should be updated firstly.
+			double deltaVelocity = 0;
+			if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
+				double acc = getAcceleration();
+				if (acc > 0)
+					setAcceleration(getAcceleration() * -1);
+			}
+			deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
+			setVelocity(velocity + deltaVelocity);
+			// !!NOTICE: The Car's position should be updated firstly.
 
-		//change y coordinate
-		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-		//here must use this.y , cannot use getY(). otherwise cannot change lane.
-		setY(  this.y +  deltaY );  
+			//change y coordinate
+			double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
+			//here must use this.y , cannot use getY(). otherwise cannot change lane.
+			setY(this.y + deltaY);
 
-		if(this.isChangingLane){ 
-			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
-		} 
-		if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
-			setAcceleration(behavior.getPreferredAcc());
-		}
-		else {
-			setAcceleration(behavior.getPreferredDcc());
-			if(behavior.likesToChangeLane()){
-				changeLane();
+			if (this.isChangingLane) {
+				setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
+			}
+			if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
+				setAcceleration(behavior.getPreferredAcc());
+			} else {
+				setAcceleration(behavior.getPreferredDcc());
+				if (behavior.likesToChangeLane()) {
+					changeLane();
+				}
 			}
 		}
 	}

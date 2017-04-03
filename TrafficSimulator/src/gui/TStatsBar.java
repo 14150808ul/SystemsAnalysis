@@ -15,6 +15,7 @@ public class TStatsBar extends JPanel implements StatsObserver{
 
         statsSubject = subject;
 
+        subject.attach(this);
 
         number_of_crashes_label = new JLabel("Number of crashes: " + statsSubject.getNumber_of_crashes());
         number_of_crashes_label.setHorizontalAlignment(SwingConstants.LEFT);

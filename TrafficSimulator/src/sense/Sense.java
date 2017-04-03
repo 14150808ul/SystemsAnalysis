@@ -2,7 +2,10 @@ package sense;
 
 import driver.Driver;
 import gui.TWindow;
+import road.Road;
+import vehicle.Vehicle;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Sense {
@@ -35,5 +38,20 @@ public class Sense {
       else{
           return min_car_x;
       }
+    }
+
+    public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
+        Rectangle space_needed = new Rectangle(driver.getX(), driver.getY(), gap , 200);
+
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) != driver) {
+                Rectangle other_car = new Rectangle(list.get(i).getX(), list.get(i).getY(), Vehicle.length, Vehicle.width);
+                if (space_needed.intersects(other_car)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

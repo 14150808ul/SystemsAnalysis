@@ -7,8 +7,8 @@ public class TestHarness {
 
     public static void main(String [] args) throws Exception
     {
-        Map map = new Map();
         Statistics statistics = new Statistics();
+        Map map = new Map(statistics);
         TWindow window = new TWindow(map, statistics);
         map.start();
     }

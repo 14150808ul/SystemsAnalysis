@@ -11,10 +11,16 @@ import collision.Collision;
 import driver.Driver;
 import pattern.Observer;
 import sense.Sense;
+import statistics.StatsSubject;
 
 public class StraightRoad extends Road{
 
-	public StraightRoad(){
+	StatsSubject statistics;
+	Collision collision;
+
+	public StraightRoad(StatsSubject statistics){
+		this.statistics = statistics;
+		collision = new Collision(driver_list, statistics);
 		roadDistance = 1000;
 	}
 	
@@ -26,7 +32,6 @@ public class StraightRoad extends Road{
 	public void updateVehicles() {
 		// TODO Auto-generated method stub
 		//update each driver
-		Collision collision = new Collision(driver_list);
 		for(Iterator<Driver> iterator = driver_list.iterator();
 			iterator.hasNext(); 
 				) {
