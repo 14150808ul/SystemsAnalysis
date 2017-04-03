@@ -7,9 +7,7 @@ import vehicle.Vehicle;
 import java.awt.*;   
 import java.util.ArrayList;
 
-	
-
-public class Collision { //Could use Observer Pattern
+public class Collision {
     private ArrayList<Driver> drivers;
     private StatsSubject statsSubject;
     
@@ -18,16 +16,15 @@ public class Collision { //Could use Observer Pattern
         drivers = d;
     }
 
-   //T(n) = O(n^2)
     public void checkForCollision(){
         for(int i = 0; i < drivers.size(); i++){
             for(int j = (i+1); j < drivers.size(); j++){
-                checkCollision(i, j);
+                checkPairForCollision(i, j);
             }
         }
     }
 
-    private void checkCollision(int i, int j){
+    private void checkPairForCollision(int i, int j){
 
         Driver d1 = drivers.get(i);
         Driver d2 = drivers.get(j);

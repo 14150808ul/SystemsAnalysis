@@ -3,7 +3,7 @@ package driver;
 public class AverageDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 160;
+        return 147;
     }
 
     public double getPreferredSpeed(){
@@ -26,6 +26,6 @@ public class AverageDriver implements Behavior {
 
     @Override
     public int getOvertakingGap() {
-        return 200;
+        return 147;
     }
 }
