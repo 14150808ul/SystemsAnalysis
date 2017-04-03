@@ -41,7 +41,13 @@ public class Sense {
     }
 
     public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
-        Rectangle space_needed = new Rectangle(driver.getX(), driver.getY(), gap , 200);
+
+        //Temporary hack - won't need this if vehicle generation is done
+        if(driver.getX() > 900){
+            return false;
+        }
+
+        Rectangle space_needed = new Rectangle(driver.getX(), 0, gap , 400);
 
         for(int i = 0; i < list.size(); i++){
             if(list.get(i) != driver) {
