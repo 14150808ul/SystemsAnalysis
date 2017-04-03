@@ -6,8 +6,8 @@ public class Vehicle
     private double max_speed; //max speed
     private double max_acceleration; //change of speed;
     private int car_image;
-    public static final int width  = 40;
-    public static final int length = 85;
+    public static final int width  = 30;
+    public static final int length = 80;
 
     public Vehicle(double max_speed, double max_acceleration, int car_image)
     {

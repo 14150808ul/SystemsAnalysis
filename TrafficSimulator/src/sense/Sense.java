@@ -43,7 +43,7 @@ public class Sense {
     public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
 
         //Temporary hack - won't need this if vehicle generation is done
-        if(driver.getX() > 900){
+        if(driver.getX() > 700 || driver.getX() < 0){
             return false;
         }
 

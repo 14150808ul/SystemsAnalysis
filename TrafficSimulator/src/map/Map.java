@@ -47,7 +47,7 @@ public class Map implements Subject{
 		//generate Driver in here!
 		//Should create DriverFactory that takes in two numbers and returns a driver object
 
-		Driver driver = new Driver(new Vehicle(3, 0, 0),
+		Driver driver = new Driver(new Vehicle(4, 0, 0),
 				new AverageDriver(), 629, 148, 4, Road.rightLane);
 		driver.setAcceleration(0.00);
 		
@@ -60,7 +60,7 @@ public class Map implements Subject{
 		road.addDriver( driver2 );
 
 		Driver driver3 = new Driver(new Car(),
-				new YoungDriver(), 800, 100, 4, 0);
+				new AverageDriver(), 800, 100, 4, 0);
 		driver3.setAcceleration(0);
 
 		road.addDriver( driver3 );
