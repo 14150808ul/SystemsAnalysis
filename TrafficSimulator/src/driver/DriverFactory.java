@@ -10,11 +10,11 @@ public class DriverFactory {
         int random_image = (int) (Math.random() * 3);
         int random_lane = (int) (Math.random() * 2);
         return new Driver(  road,
-			        		new Vehicle (3, (Math.random() * .02), random_image), 
+			        		new Vehicle (10, (Math.random() * .02), random_image), 
 			        		BEHAVIOR[(int) (Math.random() * 3)],
-			        		-0, // must be 0 -> otherwise cause problem
+			        		-60, // must be 0 -> otherwise cause problem
 			        		LANES[random_lane],
-			        		4,
+			        		3,
 			        		random_lane);
     }
 }

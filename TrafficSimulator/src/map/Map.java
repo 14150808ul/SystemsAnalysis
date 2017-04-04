@@ -8,9 +8,8 @@ import javax.swing.Timer;
 import pattern.*;
 import road.Road; 
 import road.StraightRoad;
-import statistics.Statistics;
 import statistics.StatsSubject; 
-import vehicle.Vehicle;
+
   
 import driver.*;
 

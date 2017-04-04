@@ -1,7 +1,6 @@
-package driver;
-import java.util.ArrayList;
+package driver; 
 
-import pattern.MapSubject;
+import gui.TWindow; 
 import pattern.Observer;
 import pattern.Subject;
 import road.Road;
@@ -23,9 +22,9 @@ public class Driver implements Subject  {
 
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	protected int changeLaneDuration = 780	/*millisecond*/;
+	protected int changeLaneDuration = 800	/*millisecond*/;
 	
-	protected double overtakingProbability = 1.0;
+	//protected double overtakingProbability = 1.0;
 
 	public Driver(Road road, Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
 		this.vehicle = vehicle;
@@ -160,17 +159,21 @@ public class Driver implements Subject  {
 		
 		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
 		int carPosX = (int) (x + deltaX);
-		if (carPosX < globalContract.ScaleControl.WINDOW_WIDTH )
+		if (carPosX < TWindow.WINDOW_LENGTH)
 			setX((int) (getX() + deltaX));
 		else
 			notifyObservers();
 
 		double deltaVelocity = 0;
 		if (velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed()) {
-			double acc = getAcceleration();
-			if (acc > 0)
-				setAcceleration(getAcceleration() * -1);
+			if (getAcceleration() > 0)
+				setAcceleration(behavior.getPreferredDcc());
 		}
+		else{
+			if (getAcceleration() < 0)
+				setAcceleration(behavior.getPreferredAcc());
+		}
+		
 		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
 		setVelocity(velocity + deltaVelocity);
 		// !!NOTICE: The Car's position should be updated firstly.

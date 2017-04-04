@@ -7,7 +7,7 @@ public class AverageDriver implements Behavior {
     }
 
     public double getPreferredSpeed(){
-        return 4;
+        return 7;
     }
 
     public boolean likesToChangeLane(){
@@ -26,6 +26,6 @@ public class AverageDriver implements Behavior {
 
     @Override
     public int getOvertakingGap() {
-        return 160;
+        return 170;
     }
 }

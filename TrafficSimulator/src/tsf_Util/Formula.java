@@ -12,6 +12,8 @@ public class Formula {
 		double v = eachDriver.getVelocity();
 		double t = ScaleControl.TIME_ScaleRatio;
 		double dispalcement = a * t * t / 2 + v * t;
+		if(dispalcement < 0)
+			return 0;
 		return dispalcement;
 	}
 

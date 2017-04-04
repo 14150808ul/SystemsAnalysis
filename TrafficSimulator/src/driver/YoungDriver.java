@@ -4,11 +4,11 @@ package driver;
 public class YoungDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 150;
+        return 180;
     }
 
     public double getPreferredSpeed(){
-        return 10;
+        return 7;
     }
 
     public boolean likesToChangeLane(){

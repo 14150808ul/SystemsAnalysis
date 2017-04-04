@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Image;
 import java.awt.Color;
 import driver.*;
+import road.Road;
 
 public class TCanvas extends Canvas {
 
@@ -59,7 +60,7 @@ public class TCanvas extends Canvas {
         }
 
         g =  buffer.getDrawGraphics();
-        g.drawImage(road_image, 0, (int)(Road.width * 2), null);
+        g.drawImage(road_image, 0, (int) (Road.width * 2), null);
 
         for( int i = 0; i < drivers.size(); i++ ) {
             int pic = drivers.get(i).getVehicle().getCarImage();
