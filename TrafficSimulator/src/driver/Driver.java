@@ -155,12 +155,16 @@ public class Driver implements Subject  {
 	}
 	
 	public void drive(int distance_from_car_in_front, boolean can_change_lane) {
-		if(this.getX() > 995)System.out.println(this.getX());
+		//used for testing
+		if(this.getX() >  globalContract.ScaleControl.WINDOW_WIDTH)
+			System.out.println(this.getX());
+		//end testing.
+		
 		if(crashed) return;
 		
 		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
 		int carPosX = (int) (x + deltaX);
-		if (carPosX < 995)
+		if (carPosX < globalContract.ScaleControl.WINDOW_WIDTH )
 			setX((int) (getX() + deltaX));
 		else
 			notifyObservers();

@@ -12,7 +12,7 @@ public class DriverFactory {
         return new Driver(  road,
 			        		new Vehicle (3, (Math.random() * .02), random_image), 
 			        		BEHAVIOR[(int) (Math.random() * 3)],
-			        		0, // must be 0 -> otherwise cause problem
+			        		-0, // must be 0 -> otherwise cause problem
 			        		LANES[random_lane],
 			        		4,
 			        		random_lane);

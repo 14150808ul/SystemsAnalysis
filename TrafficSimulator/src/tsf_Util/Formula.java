@@ -13,7 +13,7 @@ public class Formula {
 		double t = ScaleControl.TIME_ScaleRatio;
 		double dispalcement = a * t * t / 2 + v * t;
 		return dispalcement;
-	} 
+	}
 
 	public static double getDeltaVolecity(Driver eachDriver) {
 		return eachDriver.getAcceleration() * (ScaleControl.TIME_ScaleRatio);
@@ -27,6 +27,7 @@ public class Formula {
 		if( !driver.isChangingLane() ){
 			return 0;
 		}
+		
 		double width_LaneChange =  Road.width * 4; 
 		double dt_afterCL = driver.getDuration_AfterChangeLane();
 		int laneEnd = driver.getEndLane();	 

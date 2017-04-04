@@ -6,17 +6,17 @@ package road;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import collision.Collision;
 import driver.AverageDriver;
 import driver.Driver;
 import driver.DriverFactory;
 import pattern.Observer;
 import pattern.Subject;
+import statistics.StatsSubject;
 import vehicle.Car;
 import vehicle.Vehicle; 
 
 public abstract class Road implements Observer{
-	protected int laneNum;	// if(laneNum = 2) the inner lane = 1, the outer lane is 0;
-	protected static int roadDistance;
 	protected ArrayList<Driver> driver_list ;
 	public static final double width = 60; // pix.
 	
@@ -25,6 +25,10 @@ public abstract class Road implements Observer{
 	private static int timeCounter = 0;
 	
 
+	protected StatsSubject statistics;
+	protected Collision collision;
+	
+	
 	public abstract void updateVehicles();
 	
 	public static int getTimeCounter() {
@@ -33,13 +37,7 @@ public abstract class Road implements Observer{
 
 	public static void setTimeCounter(int timeCounter) {
 		Road.timeCounter = timeCounter;
-	}
-	// rfc
-	public Road(int laneNum) {
-		super();
-		this.laneNum = laneNum;
-		this.driver_list = new ArrayList<Driver>();
-	}
+	} 
 
 	public Road() {
 		super();
@@ -82,7 +80,7 @@ public abstract class Road implements Observer{
 				subject.remove(this);
 			}
 			catch (Exception e){
-				e.printStackTrace();
+				//e.printStackTrace();
 		    	//System.out.println(driver_list.size());
 			}
 		}

@@ -21,27 +21,24 @@ public class Map implements Subject{
 	private Road road;
 	private Timer timer;
 
-	private StatsSubject statistics;
+	//private StatsSubject statistics;
 	
 	public Map(StatsSubject statistics){
-		this.statistics = statistics;
+		//this.statistics = statistics;
 		
 		road = new StraightRoad(statistics);
 		
 		timer = new Timer(globalContract.TimeControl.TIME_UNIT, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				if(Road.getTimeCounter() >= globalContract.TimeControl.TIME_GENERATE_CAR){
 					road.generateDriver();
+					//statistics.setNumber_of_cars(statistics.getNumber_of_cars() + 1);
 					Road.setTimeCounter(0);
 				}
 				Road.setTimeCounter( Road.getTimeCounter() + globalContract.TimeControl.TIME_UNIT);
 				road.updateVehicles();
-				notifyObservers();
-
-				statistics.setNumber_of_cars(4);
-				
+				notifyObservers();				
 			}
 		});
 		//timer.start(); TOOOOOOOO EARLY TO START-> CONSENQUENCE IS TWindow.update(){ canvas.getGraphics() Cannot perform...};
