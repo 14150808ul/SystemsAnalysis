@@ -17,7 +17,7 @@ public class TWindow extends JFrame implements Observer {
 
     private Subject subject;
     public static final int WINDOW_WIDTH = 400;
-    public static final int WINDOW_LENGTH = 1000;
+    public static final int WINDOW_LENGTH = 995;
     
     private TCanvas canvas;
     private TStatsBar statsBar;
