@@ -8,6 +8,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.io.IOException;
 
+import pattern.MapSubject;
 import pattern.Observer;
 import pattern.Subject;
 import statistics.StatsSubject;
@@ -21,7 +22,7 @@ public class TWindow extends JFrame implements Observer {
     private TCanvas canvas;
     private TStatsBar statsBar;
 
-    public TWindow(Subject subject, StatsSubject statsSubject) throws IOException {
+    public TWindow(MapSubject subject, StatsSubject statsSubject) throws IOException {
 
         super("Traffic Simulator");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

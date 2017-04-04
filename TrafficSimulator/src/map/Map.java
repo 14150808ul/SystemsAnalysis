@@ -14,7 +14,7 @@ import vehicle.Vehicle;
   
 import driver.*;
 
-public class Map implements Subject{
+public class Map implements MapSubject{
 
 	private Road road;
 	private Timer timer;

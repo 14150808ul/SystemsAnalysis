@@ -30,7 +30,7 @@ public class Sense {
     }
 
     public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
-
+    														/*Why here is not driver.getY() ranther is 0*/
         Rectangle space_needed = new Rectangle(driver.getX(), 0, gap , 400);
 
         for(int i = 0; i < list.size(); i++){

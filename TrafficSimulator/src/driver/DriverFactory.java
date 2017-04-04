@@ -4,7 +4,7 @@ import vehicle.Vehicle;
 
 public class DriverFactory {
     private static Behavior [] BEHAVIOR = { new YoungDriver(), new AverageDriver(), new OldDriver()};
-    private static int [] LANES = {100,148};
+    private static int [] LANES = { 100 , 148 };
 
     public Driver createDriver(Road road) {
         int random_image = (int) (Math.random() * 3);

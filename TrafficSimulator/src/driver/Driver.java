@@ -1,6 +1,7 @@
 package driver;
 import java.util.ArrayList;
 
+import pattern.MapSubject;
 import pattern.Observer;
 import pattern.Subject;
 import road.Road;
@@ -22,7 +23,7 @@ public class Driver implements Subject  {
 
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	protected int changeLaneDuration = 1000	/*millisecond*/;
+	protected int changeLaneDuration = 780	/*millisecond*/;
 	
 	protected double overtakingProbability = 1.0;
 
@@ -154,10 +155,6 @@ public class Driver implements Subject  {
 	}
 	
 	public void drive(int distance_from_car_in_front, boolean can_change_lane) {
-		//used for testing
-		if(this.getX() >  globalContract.ScaleControl.WINDOW_WIDTH)
-			System.out.println(this.getX());
-		//end testing.
 		
 		if(crashed) return;
 		
@@ -201,12 +198,6 @@ public class Driver implements Subject  {
 		return behavior.getOvertakingGap();
 	}
 
-	@Override
-	public ArrayList<Driver> getDriverAll() {
-		ArrayList<Driver> thisDriver = new ArrayList<Driver>(); 
-		thisDriver.add(this);
-		return thisDriver;
-	}
 
 	@Override
 	public void notifyObservers() {
@@ -225,9 +216,6 @@ public class Driver implements Subject  {
 		observersList.remove(observer);
 	}
 	
-	@Override
-	public void start() {
-		// do nothing.
-	}
+
  
 }
