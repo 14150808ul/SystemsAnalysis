@@ -1,46 +1,28 @@
 package vehicle;
 
-//Generic vehicle at the moment, later on make it abstract
 public class Vehicle
 {
-    private double max_speed; //max speed
-    private double max_acceleration; //change of speed;
+    public static final int WIDTH  = 40;
+    public static final int LENGTH = 85;
+    private double max_speed;
+    private double max_acceleration;
     private int car_image;
-    public static final int width  = 30;
-    public static final int length = 80;
 
-    public Vehicle(double max_speed, double max_acceleration, int car_image)
-    {
+    public Vehicle(double max_speed, double max_acceleration, int car_image) {
         this.max_speed = max_speed;
         this.max_acceleration = max_acceleration;
         this.car_image = car_image;
     }
 
-	public void setCar_image(int car_image) {
-		this.car_image = car_image;
-	}
-
-	//max speed of car
-    public double getMax_speed() {
+    public double getMaxSpeed() {
         return max_speed;
     }
 
-    public void setMax_speed(double max_speed) {
-        this.max_speed = max_speed;
-    }
-
-    // increase or decrease speed
-    public void setMax_acceleration(double max_acceleration ) {
-        this.max_acceleration  = max_acceleration ;
-    }
-
-    public int getCar_image() {
+    public int getCarImage() {
         return car_image;
     }
 
-
-	public double getMax_acceleration() {
+	public double getMaxAcceleration() {
 		return max_acceleration ;
 	}
-    
 }

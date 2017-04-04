@@ -12,8 +12,7 @@ import driver.Driver;
 import driver.DriverFactory;
 import pattern.Observer;
 import pattern.Subject;
-import statistics.StatsSubject;
-import vehicle.Car;
+import statistics.StatsSubject; 
 import vehicle.Vehicle; 
 
 public abstract class Road implements Observer{

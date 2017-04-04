@@ -9,9 +9,7 @@ import pattern.*;
 import road.Road; 
 import road.StraightRoad;
 import statistics.Statistics;
-import statistics.StatsSubject;
-import vehicle.Car;
-import vehicle.Truck;
+import statistics.StatsSubject; 
 import vehicle.Vehicle;
   
 import driver.*;

@@ -30,8 +30,8 @@ public class Collision {
         Driver d2 = drivers.get(j);
 
         if(!(d1.isCrashed() && d2.isCrashed())) {
-            Rectangle r1 = new Rectangle(d1.getX(), d1.getY(), Vehicle.length , Vehicle.width );
-            Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), Vehicle.length , Vehicle.width  );
+            Rectangle r1 = new Rectangle(d1.getX(), d1.getY(), Vehicle.LENGTH , Vehicle.WIDTH );
+            Rectangle r2 = new Rectangle(d2.getX(), d2.getY(), Vehicle.LENGTH , Vehicle.WIDTH );
 
             if (r1.intersects(r2)) {
                 statsSubject.setNumber_of_crashes(statsSubject.getNumber_of_crashes() + 1);

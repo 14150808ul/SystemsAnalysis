@@ -82,7 +82,7 @@ public class Driver implements Subject  {
 
 	public void setVelocity(double velocity) {
 		if (velocity > 0) {
-			double max_speed = this.vehicle.getMax_speed();
+			double max_speed = this.vehicle.getMaxSpeed();
 			if (velocity < max_speed)
 				this.velocity = velocity;
 			else
@@ -107,7 +107,7 @@ public class Driver implements Subject  {
 	}
 
 	public void setAcceleration(double acceleration) {
-		double max_acc = this.vehicle.getMax_acceleration();
+		double max_acc = this.vehicle.getMaxAcceleration();
 		if (acceleration <= max_acc)
 			this.acceleration =  acceleration;
 		else
@@ -146,7 +146,6 @@ public class Driver implements Subject  {
 	public void crashed() {
 		velocity = 0;
 		acceleration = 0;
-		vehicle.setMax_speed(0);
 		crashed = true;
 	}
 
@@ -170,7 +169,7 @@ public class Driver implements Subject  {
 			notifyObservers();
 
 		double deltaVelocity = 0;
-		if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
+		if (velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed()) {
 			double acc = getAcceleration();
 			if (acc > 0)
 				setAcceleration(getAcceleration() * -1);

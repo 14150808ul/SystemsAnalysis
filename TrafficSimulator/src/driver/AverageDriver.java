@@ -26,6 +26,6 @@ public class AverageDriver implements Behavior {
 
     @Override
     public int getOvertakingGap() {
-        return 170;
+        return 160;
     }
 }
