@@ -1,0 +1,3 @@
+I think,
+Driver is a Subject, when collision ocurred, it should send message to ** to notify updating,
+

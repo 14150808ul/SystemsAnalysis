@@ -25,13 +25,23 @@ public class Map implements Subject{
 	
 	public Map(StatsSubject statistics){
 		this.statistics = statistics;
+		
 		road = new StraightRoad(statistics);
-		generateDriver();
+		
 		timer = new Timer(globalContract.TimeControl.TIME_UNIT, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(Road.getTimeCounter() >= globalContract.TimeControl.TIME_GENERATE_CAR){
+					road.generateDriver();
+					Road.setTimeCounter(0);
+				}
+				Road.setTimeCounter( Road.getTimeCounter() + globalContract.TimeControl.TIME_UNIT);
 				road.updateVehicles();
 				notifyObservers();
+
+				statistics.setNumber_of_cars(4);
+				
 			}
 		});
 		//timer.start(); TOOOOOOOO EARLY TO START-> CONSENQUENCE IS TWindow.update(){ canvas.getGraphics() Cannot perform...};
@@ -42,39 +52,7 @@ public class Map implements Subject{
 	**NOTICE: 		The method modefier is public?
 	**Attention: 	There are lots of way to generate cars:
 	** 				This method should be allocated into a interface which used to polymorphismly generate cars
-	***/
-	public void generateDriver(){		
-		//generate Driver in here!
-		//Should create DriverFactory that takes in two numbers and returns a driver object
-
-		Driver driver = new Driver(new Vehicle(4, 0, 0),
-				new AverageDriver(), 629, 148, 4, Road.rightLane);
-		driver.setAcceleration(0.00);
-		
-		road.addDriver( driver );
-
-		Driver driver2 = new Driver(new Car(),
-				new AverageDriver(), 400, 100, 4, 0);
-		driver2.setAcceleration(0);
-
-		road.addDriver( driver2 );
-
-		Driver driver3 = new Driver(new Car(),
-				new AverageDriver(), 800, 100, 4, 0);
-		driver3.setAcceleration(0);
-
-		road.addDriver( driver3 );
-
-		Driver driver4 = new Driver(new Car(),
-				new AverageDriver(), 0, 148, 4, 1);
-		driver4.setAcceleration(0);
-
-		road.addDriver( driver4 );
-
-		//Hard code for now
-		statistics.setNumber_of_cars(4);
-	}
-	
+	***/ 
 	@Override
 	public void attach(Observer observer) {
 		observersList.add(observer);
@@ -88,11 +66,17 @@ public class Map implements Subject{
 	@Override
 	public void notifyObservers() {
 		for(Observer o: observersList){
-			o.update();
+			o.update(this);
 		}
 	}
+	
 	@Override
 	public void start() {
 		timer.start();
+	}
+
+	@Override
+	public void remove(Observer observer) {
+		observersList.remove(observer);
 	}
 }

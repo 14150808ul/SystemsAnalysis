@@ -41,7 +41,8 @@ public class Statistics implements StatsSubject{
     public int getNumber_of_cars(){
         return number_of_cars;
     }
-
+    
+    @Override
     public void setNumber_of_cars(int num){
         number_of_cars = num;
         notifyObservers();

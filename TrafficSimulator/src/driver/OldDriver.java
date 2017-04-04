@@ -26,6 +26,6 @@ public class OldDriver implements Behavior {
 
     @Override
     public int getOvertakingGap() {
-        return 300;
+        return 200;
     }
 }

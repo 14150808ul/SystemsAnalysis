@@ -62,7 +62,6 @@ public class Formula {
 		double v_LC = driver.getVelocity_changeLane();
 		double deltaDisplacement_LaneChange = acc_ChangeLane*dt*dt/2 + v_LC * globalContract.TimeControl.TIME_UNIT;
 		driver.setVelocity_changeLane(  (dt_afterCL >= T) ?  0 : acc_ChangeLane + v_LC );
-		driver.all += deltaDisplacement_LaneChange * direction;
 		
 		//just used for testing
 		//System.out.println(driver.all);

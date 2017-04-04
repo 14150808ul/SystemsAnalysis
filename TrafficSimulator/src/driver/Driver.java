@@ -1,8 +1,12 @@
 package driver;
+import java.util.ArrayList;
+
+import pattern.Observer;
+import pattern.Subject;
 import road.Road;
 import vehicle.Vehicle;
 
-public class Driver  {
+public class Driver implements Subject  {
 	private Vehicle vehicle;
 	private Behavior behavior;    //this is an interface or abstract class not sure yet
 	private double velocity;    //current speed and direction
@@ -18,15 +22,11 @@ public class Driver  {
 
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	public double all = 0; // test
 	protected int changeLaneDuration = 1000	/*millisecond*/;
-	protected int responseTime = 10;            //When the collision occured, the time to react/brake.
-	//	& when the car in front of it begin to drive, the response time to start off.
 	
 	protected double overtakingProbability = 1.0;
 
-
-	public Driver(Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
+	public Driver(Road road, Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
 		this.vehicle = vehicle;
 		this.behavior = behavior;
 		this.x = x;
@@ -37,8 +37,9 @@ public class Driver  {
 		this.isChangingLane = false;
 		this.duration_AfterChangeLane = 0;
 		this.crashed = false;
+		attach(road);
 	}
-
+	
 	public void changeLane() {
 		this.isChangingLane = true ;
 	}
@@ -154,45 +155,76 @@ public class Driver  {
 	}
 	
 	public void drive(int distance_from_car_in_front, boolean can_change_lane) {
-		if(!crashed) {
-			double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
-			int carPosX = (int) (x + deltaX);
-			if (carPosX < 1000)
-				setX((int) (getX() + deltaX));
-			else
-				setX(-95);
+		if(this.getX() > 995)System.out.println(this.getX());
+		if(crashed) return;
+		
+		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
+		int carPosX = (int) (x + deltaX);
+		if (carPosX < 995)
+			setX((int) (getX() + deltaX));
+		else
+			notifyObservers();
 
-			double deltaVelocity = 0;
-			if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
-				double acc = getAcceleration();
-				if (acc > 0)
-					setAcceleration(getAcceleration() * -1);
-			}
-			deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
-			setVelocity(velocity + deltaVelocity);
-			// !!NOTICE: The Car's position should be updated firstly.
+		double deltaVelocity = 0;
+		if (velocity >= vehicle.getMax_speed() || velocity >= behavior.getPreferredSpeed()) {
+			double acc = getAcceleration();
+			if (acc > 0)
+				setAcceleration(getAcceleration() * -1);
+		}
+		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
+		setVelocity(velocity + deltaVelocity);
+		// !!NOTICE: The Car's position should be updated firstly.
 
-			//change y coordinate
-			double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-			//here must use this.y , cannot use getY(). otherwise cannot change lane.
-			setY(this.y + deltaY);
+		//change y coordinate
+		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
+		//here must use this.y , cannot use getY(). otherwise cannot change lane.
+		setY(this.y + deltaY);
 
-			if (this.isChangingLane) {
-				setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
-			}
-			if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
-				setAcceleration(behavior.getPreferredAcc());
-			} else {
-				setAcceleration(behavior.getPreferredDcc());
-				if (behavior.likesToChangeLane() && can_change_lane) {
-					changeLane();
-				}
+		if (this.isChangingLane) {
+			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
+		}
+		if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
+			setAcceleration(behavior.getPreferredAcc());
+		} else {
+			setAcceleration(behavior.getPreferredDcc());
+			if (behavior.likesToChangeLane() && can_change_lane) {
+				changeLane();
 			}
 		}
+		
 	}
 
 	public int getOvertakingGap() {
 		return behavior.getOvertakingGap();
+	}
+
+	@Override
+	public ArrayList<Driver> getDriverAll() {
+		ArrayList<Driver> thisDriver = new ArrayList<Driver>(); 
+		thisDriver.add(this);
+		return thisDriver;
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(Observer observer: observersList){
+			observer.update(this);
+		}
+	}
+
+	@Override
+	public void attach(Observer observer) {
+		observersList.add(observer);
+	}
+
+	@Override
+	public void remove(Observer observer) {
+		observersList.remove(observer);
+	}
+	
+	@Override
+	public void start() {
+		// do nothing.
 	}
  
 }

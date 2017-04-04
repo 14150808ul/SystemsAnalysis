@@ -47,7 +47,7 @@ public class TWindow extends JFrame implements Observer {
 
     }
 
-    public void update() {
+    public void update(Subject subject) {
         Graphics g = canvas.getGraphics();
         canvas.update(g);
     }
