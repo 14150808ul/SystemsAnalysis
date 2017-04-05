@@ -46,11 +46,12 @@ public class Sense {
 
     public static boolean isLaneClear(ArrayList<Driver> driverArrayList, int lane){
         Rectangle space_needed;
+        int distance_needed = 60;
         if(lane == 0) {
-            space_needed = new Rectangle(0, 100, 100, 40);
+            space_needed = new Rectangle(0, 100, distance_needed, 40);
         }
         else {
-            space_needed = new Rectangle(0, 148, 100, 40);
+            space_needed = new Rectangle(0, 148, distance_needed, 40);
         }
 
         for (int i = 0; i < driverArrayList.size(); i++) {
