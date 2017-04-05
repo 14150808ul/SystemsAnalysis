@@ -8,7 +8,9 @@ import javax.swing.Timer;
 import pattern.*;
 import road.Road; 
 import road.StraightRoad;
-import statistics.StatsSubject; 
+import sense.Sense;
+import statistics.Statistics;
+import statistics.StatsSubject;
 
   
 import driver.*;
@@ -29,7 +31,10 @@ public class Map implements MapSubject{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(Road.getTimeCounter() >= globalContract.TimeControl.TIME_GENERATE_CAR){
-					road.generateDriver();
+					if(Sense.isLaneClear(road.getDriver_list(), 0) || Sense.isLaneClear(road.getDriver_list(), 1)) {
+
+						road.generateDriver();
+					}
 					//statistics.setNumber_of_cars(statistics.getNumber_of_cars() + 1);
 					Road.setTimeCounter(0);
 				}
@@ -73,4 +78,5 @@ public class Map implements MapSubject{
 	public void remove(Observer observer) {
 		observersList.remove(observer);
 	}
+
 }

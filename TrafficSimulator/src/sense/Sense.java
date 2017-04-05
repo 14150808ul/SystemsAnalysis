@@ -30,7 +30,7 @@ public class Sense {
     }
 
     public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
-    														/*Why here is not driver.getY() ranther is 0*/
+
         Rectangle space_needed = new Rectangle(driver.getX(), 0, gap , 400);
 
         for(int i = 0; i < list.size(); i++){
@@ -41,6 +41,30 @@ public class Sense {
                 }
             }
         }
+        return true;
+    }
+
+    public static boolean isLaneClear(ArrayList<Driver> driverArrayList, int lane){
+        Rectangle space_needed;
+        if(lane == 0) {
+            space_needed = new Rectangle(0, 100, 100, 40);
+        }
+        else {
+            space_needed = new Rectangle(0, 148, 100, 40);
+        }
+
+        for (int i = 0; i < driverArrayList.size(); i++) {
+
+                    Rectangle car = new Rectangle(driverArrayList.get(i).getX(),
+                                                  driverArrayList.get(i).getY(),
+                                                  Vehicle.LENGTH,
+                                                  Vehicle.WIDTH);
+
+                    if (space_needed.intersects(car)) {
+                        return false;
+                    }
+            }
+
         return true;
     }
 }
