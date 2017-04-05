@@ -12,10 +12,12 @@ public class Sense {
     public static int getDistanceFromCarInFront(Driver driver, ArrayList<Driver> list) {
 
       int next_car_distance = -1;
+      int tolerance = 10;
 
       for(int i = 0; i < list.size(); i++){
-
-          if(list.get(i).getY() == driver.getY() ) {
+        //Check if car is on the same lane
+          int difference = Math.abs(list.get(i).getY() - driver.getY());
+          if( difference < tolerance ) {
 
               if (list.get(i).getX() > driver.getX()) {
                   int distance = list.get(i).getX() - driver.getX();
