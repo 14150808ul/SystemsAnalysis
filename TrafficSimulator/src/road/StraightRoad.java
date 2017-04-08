@@ -15,8 +15,10 @@ import statistics.StatsSubject;
 
 public class StraightRoad extends Road{
 
+	public StraightRoad(){}
+	
 	public StraightRoad(StatsSubject statistics){
-		this.statistics = statistics;
+		super(statistics);
 		collision = new Collision(driver_list, statistics);
 	}
 	

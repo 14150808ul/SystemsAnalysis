@@ -4,7 +4,7 @@ public class Vehicle
 {
     public static final int WIDTH  = 40;
     public static final int LENGTH = 85;
-    public static final int MARGIN = 11;
+    public static final int MARGIN = 6;
     private double max_speed;
     private double max_acceleration;
     private int car_image;

@@ -12,7 +12,7 @@ public class Sense {
     public static int getDistanceFromCarInFront(Driver driver, ArrayList<Driver> list) {
 
       int next_car_distance = -1;
-      int tolerance = 10;
+      int tolerance = (int) (Road.width / 2);
 
       for(int i = 0; i < list.size(); i++){
         //Check if car is on the same lane
@@ -33,7 +33,7 @@ public class Sense {
 
     public static boolean canChangeLane(Driver driver, ArrayList<Driver> list, int gap){
 
-        Rectangle space_needed = new Rectangle(driver.getX(), 0, gap , 400);
+        Rectangle space_needed = new Rectangle(driver.getX() - gap , driver.getY() - (int)(2 * Road.width), 2*gap , (int)(4 *Road.width) );
 
         for(int i = 0; i < list.size(); i++){
             if(list.get(i) != driver) {
@@ -48,12 +48,12 @@ public class Sense {
 
     public static boolean isLaneClear(ArrayList<Driver> driverArrayList, int lane){
         Rectangle space_needed;
-        int distance_needed = 60;
-        if(lane == 0) {
-            space_needed = new Rectangle(0, 100, distance_needed, 40);
+        int distance_needed = 100;
+        if(lane == Road.leftLane) {
+            space_needed = new Rectangle(0, 100, distance_needed, (int)Road.width/2);
         }
         else {
-            space_needed = new Rectangle(0, 148, distance_needed, 40);
+            space_needed = new Rectangle(0, 148, distance_needed, (int)Road.width/2);
         }
 
         for (int i = 0; i < driverArrayList.size(); i++) {

@@ -9,4 +9,5 @@ public interface Behavior
     double getPreferredSpeed();
     boolean likesToChangeLane();
     int getOvertakingGap();
+	double getSlamBrakeDcc();
 }

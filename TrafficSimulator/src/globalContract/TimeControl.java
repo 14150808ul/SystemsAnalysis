@@ -7,6 +7,6 @@ public class TimeControl {
 	//TIME_UNIT CANNOT BIGGR 5 : COZ THE OVERTAKKING WILL OCURR BIG BUG.
 
 	/*Time for generating car*/
-	public static final int TIME_GENERATE_CAR = 400 ; // milisecond.
+	public static final int TIME_GENERATE_CAR =  360 ; // milisecond.
 	
 }

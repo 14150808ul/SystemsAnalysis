@@ -22,10 +22,12 @@ public class Driver implements Subject  {
 
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	protected int changeLaneDuration = 800	/*millisecond*/;
+	public static final int changeLaneDuration = 800	/*millisecond*/;
 	
 	//protected double overtakingProbability = 1.0;
 
+	public Driver(){}
+	
 	public Driver(Road road, Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
 		this.vehicle = vehicle;
 		this.behavior = behavior;
@@ -44,6 +46,12 @@ public class Driver implements Subject  {
 		this.isChangingLane = true ;
 	}
 
+	public void stopChangeLane(){
+		this.isChangingLane = false;
+		this.duration_AfterChangeLane = 0;
+		this.velocity_changeLane = 0;
+	}
+	
 	public boolean isChangingLane() {
 		return isChangingLane;
 	}
@@ -157,42 +165,87 @@ public class Driver implements Subject  {
 		
 		if(crashed) return;
 		
+		
 		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
 		int carPosX = (int) (x + deltaX);
 		if (carPosX < TWindow.WINDOW_LENGTH)
 			setX((int) (getX() + deltaX));
 		else
 			notifyObservers();
+		
+		//change y coordinate
+		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
+		//here must use this.y , cannot use getY(). otherwise cannot change lane.
+		double YCoordinate = this.y + deltaY;
+		YCoordinate = ( YCoordinate < TWindow.LEFTWANE_Y_Coordinate ) ? TWindow.LEFTWANE_Y_Coordinate : YCoordinate ;
+		YCoordinate = ( YCoordinate > TWindow.RIGHTWANE_Y_Coordinate ) ? TWindow.RIGHTWANE_Y_Coordinate : YCoordinate ;
+		setY( YCoordinate );
 
 		double deltaVelocity = 0;
-		if (velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed()) {
-			if (getAcceleration() > 0)
+
+		if(velocity > 0){ 
+			if (velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed()) {
 				setAcceleration(behavior.getPreferredDcc());
+			}
 		}
-		else{
-			if (getAcceleration() < 0)
-				setAcceleration(behavior.getPreferredAcc());
+		else{ // velocity <=0 
+			setAcceleration(behavior.getPreferredAcc());
 		}
+		
+//		else{
+//			if (getAcceleration() < 0)
+//				setAcceleration(behavior.getPreferredAcc());
+//		}
 		
 		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
 		setVelocity(velocity + deltaVelocity);
 		// !!NOTICE: The Car's position should be updated firstly.
 
-		//change y coordinate
-		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-		//here must use this.y , cannot use getY(). otherwise cannot change lane.
-		setY(this.y + deltaY);
 
 		if (this.isChangingLane) {
 			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
 		}
+		
 		if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
 			setAcceleration(behavior.getPreferredAcc());
-		} else {
-			setAcceleration(behavior.getPreferredDcc());
-			if (behavior.likesToChangeLane() && can_change_lane) {
-				changeLane();
+		} 
+		else {
+//			setAcceleration(behavior.getSlamBrakeDcc());
+			if(tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front) < this.behavior.getPreferredDcc()){
+				setAcceleration(behavior.getPreferredDcc());
 			}
+			else{
+				if(this.velocity == 0 ){
+					///setAcceleration( tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front) );
+					 changeLane();
+				}
+				else{
+					if(Math.random() >0.5){
+						System.out.println("perfrom slam brake");;
+						setAcceleration(-1*tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front));
+						if(distance_from_car_in_front < Vehicle.LENGTH + Vehicle.MARGIN){
+							System.out.println("Invloked: distance="+distance_from_car_in_front );
+							this.velocity = 0;
+							this.acceleration = 0;
+						}							
+					}
+					else{
+						setAcceleration(this.behavior.getPreferredAcc());
+						if (behavior.likesToChangeLane() ){
+							if( can_change_lane) {
+								changeLane();
+							}
+							else{
+								stopChangeLane();
+							}
+						}
+					}
+				}
+				
+			}
+//			if (behavior.likesToChangeLane() && can_change_lane) {
+//				changeLane();
+//			}
 		}
 		
 	}

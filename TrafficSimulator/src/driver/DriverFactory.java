@@ -17,4 +17,15 @@ public class DriverFactory {
 			        		3,
 			        		random_lane);
     }
+    
+    public Driver createDriver_withSpecificLane(Road road, int lane) {
+        int random_image = (int) (Math.random() * 3);
+        return new Driver(  road,
+			        		new Vehicle (4.4, (Math.random() * .02), random_image), 
+			        		BEHAVIOR[(int) (Math.random() * 3)],
+			        		-60, // must be 0 -> otherwise cause problem
+			        		LANES[lane],
+			        		2.7,
+			        		lane);
+    }
 }

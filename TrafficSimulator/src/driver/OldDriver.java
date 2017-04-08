@@ -3,11 +3,11 @@ package driver;
 public class OldDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 200;
+        return 240;
     }
 
     public double getPreferredSpeed(){
-        return 4;
+        return 3.5;
     }
 
     public boolean likesToChangeLane(){
@@ -16,16 +16,21 @@ public class OldDriver implements Behavior {
 
 	@Override
 	public double getPreferredAcc() {
-		 return 0.08;
+		 return 0.28;
 	}
 
 	@Override
 	public double getPreferredDcc() {
-		return -0.2;
+		return -.45;
 	}
 
     @Override
     public int getOvertakingGap() {
         return 300;
     }
+
+	@Override
+	public double getSlamBrakeDcc() { 
+		return -3;
+	}
 }

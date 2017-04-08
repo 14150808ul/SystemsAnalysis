@@ -19,26 +19,18 @@ public class Map implements MapSubject{
 
 	private Road road;
 	private Timer timer;
-
-	//private StatsSubject statistics;
 	
+	public Map(){}
 	public Map(StatsSubject statistics){
-		//this.statistics = statistics;
 		
 		road = new StraightRoad(statistics);
 		
 		timer = new Timer(globalContract.TimeControl.TIME_UNIT, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(Road.getTimeCounter() >= globalContract.TimeControl.TIME_GENERATE_CAR){
-					if(Sense.isLaneClear(road.getDriver_list(), 0) || Sense.isLaneClear(road.getDriver_list(), 1)) {
-
-						road.generateDriver();
-					}
-					//statistics.setNumber_of_cars(statistics.getNumber_of_cars() + 1);
-					Road.setTimeCounter(0);
+				if(Road.isTimeToGeneratorDriver()){
+					road.generateDriver();
 				}
-				Road.setTimeCounter( Road.getTimeCounter() + globalContract.TimeControl.TIME_UNIT);
 				road.updateVehicles();
 				notifyObservers();				
 			}
@@ -46,12 +38,6 @@ public class Map implements MapSubject{
 		//timer.start(); TOOOOOOOO EARLY TO START-> CONSENQUENCE IS TWindow.update(){ canvas.getGraphics() Cannot perform...};
 	}
 	
-	
-	/** TODO: Refactor Here After iteration 1.
-	**NOTICE: 		The method modefier is public?
-	**Attention: 	There are lots of way to generate cars:
-	** 				This method should be allocated into a interface which used to polymorphismly generate cars
-	***/ 
 	@Override
 	public void attach(Observer observer) {
 		observersList.add(observer);

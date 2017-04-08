@@ -4,11 +4,11 @@ package driver;
 public class YoungDriver implements Behavior {
 
     public int getPreferredDistance(){
-        return 180;
+        return 130;
     }
 
     public double getPreferredSpeed(){
-        return 7;
+        return 6;
     }
 
     public boolean likesToChangeLane(){
@@ -17,16 +17,21 @@ public class YoungDriver implements Behavior {
 
 	@Override
 	public double getPreferredAcc() {
-		return 0.48;
+		return 0.52;
 	}
 
 	@Override
 	public double getPreferredDcc() {
-		return -0.5;
+		return -1.5;
 	}
 
     @Override
     public int getOvertakingGap() {
         return 100;
     }
+
+	@Override
+	public double getSlamBrakeDcc() { 
+		return -8.5;
+	}
 }

@@ -58,6 +58,7 @@ public class TCanvas extends Canvas {
 
         g =  buffer.getDrawGraphics();
         g.drawImage(road_image, 0, 120, null);
+        g.drawImage(road_image, 1000, 120, null);
 
         for( int i = 0; i < drivers.size(); i++ ) {
             int pic = drivers.get(i).getVehicle().getCarImage();

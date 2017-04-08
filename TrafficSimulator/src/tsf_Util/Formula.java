@@ -1,7 +1,6 @@
 package tsf_Util;
 import globalContract.* ;
-import road.Road;
-import vehicle.Vehicle;
+import road.Road; 
 import driver.Driver;
 
 public class Formula {
@@ -29,7 +28,6 @@ public class Formula {
 		if( !driver.isChangingLane() ){
 			return 0;
 		}
-		
 		double width_LaneChange =  Road.width * 4; 
 		double dt_afterCL = driver.getDuration_AfterChangeLane();
 		int laneEnd = driver.getEndLane();	 
@@ -44,32 +42,23 @@ public class Formula {
 		else if(dt_afterCL < T){
 			acc_ChangeLane = -4*width_LaneChange/(T * T);
 		}
-		else{
-			//just used for testing
-			//System.out.println("Before lane change:");
-			//System.out.println("Endlane = "+ driver.getEndLane());
-			//System.out.println("laneStart = "+ driver.getStartLane());
-			
+		else{			
 			driver.setDuration_AfterChangeLane(0);
 			driver.setStartLane(laneEnd);
 			driver.setEndLane(laneStart);
-			driver.setChangingLane(false);
-			
-			//just used for testing
-			//System.out.println("AFTER lane change:");
-			//System.out.println("Endlane = "+ driver.getEndLane());
-			//System.out.println("laneStart = "+ driver.getStartLane());
-			
+			driver.setChangingLane(false);	
 		}
 		double dt =   globalContract.TimeControl.TIME_UNIT /* globalContract.ScaleControl.TIME_ScaleRatio */;//why Time 5 I also do not know...
 		double v_LC = driver.getVelocity_changeLane();
 		double deltaDisplacement_LaneChange = acc_ChangeLane*dt*dt/2 + v_LC * globalContract.TimeControl.TIME_UNIT;
 		driver.setVelocity_changeLane(  (dt_afterCL >= T) ?  0 : acc_ChangeLane + v_LC );
-		
-		//just used for testing
-		//System.out.println(driver.all);
-		
 		return  deltaDisplacement_LaneChange * direction;
+	}
+	
+	public static double getNeededDcc(double volecity , double distance_from_car_in_front){
+
+		//System.out.println(1.5 * (volecity * volecity ) / distance_from_car_in_front);;
+		return 1.5 * (volecity * volecity ) / distance_from_car_in_front  ;
 	}
 
 }
