@@ -1,6 +1,4 @@
 # SystemsAnalysis
 Repository for Systems Analysis Project
 
-#Hello
-aa
-#GEORGE WAS HERE
+Project needs to be organised again and fault due to George
