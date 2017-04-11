@@ -85,7 +85,7 @@ public class Driver implements Subject  {
 	}
 
 	public int getDurationLaneChange() {
-		return this.changeLaneDuration;
+		return changeLaneDuration;
 	}
 
 	public void setVelocity(double velocity) {
@@ -191,12 +191,7 @@ public class Driver implements Subject  {
 		else{ // velocity <=0 
 			setAcceleration(behavior.getPreferredAcc());
 		}
-		
-//		else{
-//			if (getAcceleration() < 0)
-//				setAcceleration(behavior.getPreferredAcc());
-//		}
-		
+
 		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
 		setVelocity(velocity + deltaVelocity);
 		// !!NOTICE: The Car's position should be updated firstly.
@@ -221,10 +216,9 @@ public class Driver implements Subject  {
 				}
 				else{
 					if(Math.random() >0.5){
-						System.out.println("perfrom slam brake");;
+
 						setAcceleration(-1*tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front));
 						if(distance_from_car_in_front < Vehicle.LENGTH + Vehicle.MARGIN){
-							System.out.println("Invloked: distance="+distance_from_car_in_front );
 							this.velocity = 0;
 							this.acceleration = 0;
 						}							
@@ -243,9 +237,6 @@ public class Driver implements Subject  {
 				}
 				
 			}
-//			if (behavior.likesToChangeLane() && can_change_lane) {
-//				changeLane();
-//			}
 		}
 		
 	}
