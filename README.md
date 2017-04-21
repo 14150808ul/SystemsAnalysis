@@ -2,5 +2,14 @@
 Repository for Systems Analysis Project
 
 Project needs to be organised again and fault due to George
+
 + classDiagram 
- ![classDiagram](/classDiagram.png)
+ ![classDiagram](/DocumentAll/diagrams/classDiagram.png)
+
++ full class diagram 
+ ![full class diagram ](/DocumentAll/diagrams/fullClassDiagram.png)
+ 
++ initial use case diagram 
+ ![initial use case diagram ](/DocumentAll/diagrams/initalUseCase.jpg)
+ 
+ 
