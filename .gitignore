@@ -1,6 +1,0 @@
-*.class
-*.log
-TrafficSimulator/bin
-TrafficSimulator/.idea
-*.rej
-*.iml

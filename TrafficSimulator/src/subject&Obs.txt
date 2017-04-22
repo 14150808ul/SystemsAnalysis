@@ -1,9 +1,0 @@
-I think,
-Driver is a Subject, when collision ocurred, it should send message to ** to notify updating,
-
-把sense里的业务改了，正方形才冲突判定改成前后50米内(其实是getOvertakkingGap)没有车，
-	再把behavior的getOvertakingGap改改，。
-	
-	
-跟驰模型比较重要，建议代码中的刹车要判断: 若在可控制的范围内，就用perferredAcc()来刹车，超过可控制的范围内就要用急刹车。（在formula类中有对加速度进行判断的函数，返回值为所须加速度）。	
-运用观察者模式，加入一个冲突判断：对单个道路，在100米内，若无车，就产生车辆(generate car 在 Road类中)。
