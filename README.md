@@ -13,3 +13,7 @@ Project needs to be organised again and fault due to George
  ![initial use case diagram ](/DocumentAll/diagrams/initalUseCase.jpg)
  
  
++ Entity Relationship diagram 
+ ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
+ 
+ 
