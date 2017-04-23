@@ -15,6 +15,11 @@ Project needs to be organised again and fault due to George
 + inital Class Diagram
  ![initial class diagram ](/DocumentAll/diagrams/initalClassDIagram.png)
  
+ 
++ initial E-R Diagram
+ ![initialERDiagram](/DocumentAll/diagrams/initialERDiagram.png)
+ 
+ 
 + Entity Relationship diagram 
  ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
 
