@@ -10,7 +10,7 @@ Project needs to be organised again and fault due to George
  ![full class diagram ](/DocumentAll/diagrams/fullClassDiagram.png)
  
 + final use case diagram 
- ![initial use case diagram ](/DocumentAll/diagrams/use_case.jpg)
+ ![initial use case diagram ](/DocumentAll/diagrams/use_case.png)
  
  
 + Entity Relationship diagram 
