@@ -11,11 +11,13 @@ Project needs to be organised again and fault due to George
  
 + final use case diagram 
  ![initial use case diagram ](/DocumentAll/diagrams/use_case.png)
- 
+  
++ inital Class Diagram
+ ![initial class diagram ](/DocumentAll/diagrams/initalClassDIagram.png)
  
 + Entity Relationship diagram 
  ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
- 
+
  
 + State Machine diagram 
  ![Entity Relationship diagram](/DocumentAll/diagrams/stateMachine_.jpg)
