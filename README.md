@@ -17,3 +17,11 @@ Project needs to be organised again and fault due to George
  ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
  
  
++ State Machine diagram 
+ ![Entity Relationship diagram](/DocumentAll/diagrams/stateMachine_.jpg)
+ 
+ 
++ Sequence  diagram 
+ ![Entity Relationship diagram](/DocumentAll/diagrams/sequence%20Diagram.png)
+ 
+ 
