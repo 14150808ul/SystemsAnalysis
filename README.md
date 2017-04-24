@@ -28,11 +28,11 @@ Project needs to be organised again and fault due to George
  ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
  
 + Final system architectre diagram 
- ![Entity Relationship diagram](/DocumentAll/diagrams/ER_Diagram.jpg)
+ ![Entity Relationship diagram](/DocumentAll/diagrams/systemArchi.png)
 
  
 + State Machine diagram 
- ![Entity Relationship diagram](/DocumentAll/diagrams/systemArchi.png)
+ ![Entity Relationship diagram](/DocumentAll/diagrams/stateMachine_.jpg)
  
  
 + Sequence  diagram 
