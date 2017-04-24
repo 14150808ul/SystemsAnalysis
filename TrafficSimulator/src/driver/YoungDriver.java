@@ -1,37 +1,36 @@
 package driver;
 
 
-public class YoungDriver implements Behavior {
+class YoungDriver extends BehaviorDecorator
+{
+    private Behavior behavior;
 
-    public int getPreferredDistance(){
-        return 130;
+    YoungDriver(Behavior behavior) {
+        this.behavior = behavior;
     }
-
-    public double getPreferredSpeed(){
-        return 6;
-    }
-
-    public boolean likesToChangeLane(){
-        return true;
-    }
-
-	@Override
-	public double getPreferredAcc() {
-		return 0.52;
-	}
-
-	@Override
-	public double getPreferredDcc() {
-		return -1.5;
-	}
 
     @Override
-    public int getOvertakingGap() {
-        return 100;
+    double getPreferredAcc() {
+        return behavior.getPreferredAcc() + .6;
     }
 
-	@Override
-	public double getSlamBrakeDcc() { 
-		return -8.5;
-	}
+    @Override
+    double getPreferredDcc() {
+        return behavior.getPreferredDcc() + -2;
+    }
+
+    @Override
+    int getPreferredDistance() {
+        return behavior.getPreferredDistance() - 4;
+    }
+
+    @Override
+    double getPreferredSpeed() {
+        return behavior.getPreferredSpeed() + 12;
+    }
+
+    @Override
+    int getOvertakingGap() {
+        return behavior.getOvertakingGap() + 100;
+    }
 }

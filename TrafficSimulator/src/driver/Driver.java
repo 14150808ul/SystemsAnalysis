@@ -6,47 +6,40 @@ import pattern.Subject;
 import road.Road;
 import vehicle.Vehicle;
 
-public class Driver implements Subject  {
+public class Driver implements Subject
+{
 	private Vehicle vehicle;
-	private Behavior behavior;    //this is an interface or abstract class not sure yet
-	private double velocity;    //current speed and direction
-	private double acceleration;//current acceleration
+	private Behavior behavior;
+	private double velocity;
+	private double acceleration;
 	private int x;
-	private double y;	//this attribute must be double -> for it is the very little change of lane change displacement.
-
-	private boolean crashed; //robert crash
-
-	private int startLane ; // important attribute to change lane
-	private int endLane ; 
+	private double y;
+	private boolean crashed;
+	private int start_lane;
+	private int endLane;
 	private double duration_AfterChangeLane = 0;
-
 	private boolean isChangingLane = false;
 	private double velocity_changeLane = 0;
-	public static final int changeLaneDuration = 800	/*millisecond*/;
-	
-	//protected double overtakingProbability = 1.0;
 
-	public Driver(){}
-	
-	public Driver(Road road, Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int startlane) {
+	public Driver(Road road, Vehicle vehicle, Behavior behavior, int x, int y, double velocity, int start_lane)
+	{
 		this.vehicle = vehicle;
 		this.behavior = behavior;
 		this.x = x;
 		this.y = y;
 		this.velocity = velocity;
-		this.startLane = startlane;
-		this.endLane = ( startlane == Road.leftLane ? Road.rightLane : Road.leftLane);
-		this.isChangingLane = false;
+		this.start_lane = start_lane;
+		this.endLane = ( start_lane == Road.leftLane ? Road.rightLane : Road.leftLane);
 		this.duration_AfterChangeLane = 0;
 		this.crashed = false;
 		attach(road);
 	}
 	
-	public void changeLane() {
+	private void changeLane() {
 		this.isChangingLane = true ;
 	}
 
-	public void stopChangeLane(){
+	private void stopChangeLane(){
 		this.isChangingLane = false;
 		this.duration_AfterChangeLane = 0;
 		this.velocity_changeLane = 0;
@@ -72,7 +65,7 @@ public class Driver implements Subject  {
 		return x;
 	}
 
-	public void setX(int x) {
+	private void setX(int x) {
 		this.x = x;
 	}
 
@@ -80,21 +73,23 @@ public class Driver implements Subject  {
 		return  (int) Math.round(y); // 2.3 return 2; while 2.5 return 3 -> without this cannot change lane.
 	}
 
-	public void setY(double y) {
+	private void setY(double y) {
 		this.y = y;
 	}
 
-	public int getDurationLaneChange() {
-		return changeLaneDuration;
+	public static int getDurationLaneChange() {
+		return 1000;
 	}
 
-	public void setVelocity(double velocity) {
-		if (velocity > 0) {
+	private void setVelocity(double velocity)
+	{
+		if (velocity > 0)
+		{
 			double max_speed = this.vehicle.getMaxSpeed();
-			if (velocity < max_speed)
-				this.velocity = velocity;
-			else
-				this.velocity = max_speed;
+
+			if (velocity < max_speed) this.velocity = velocity;
+
+			else this.velocity = max_speed;
 		}
 	}
 
@@ -106,25 +101,17 @@ public class Driver implements Subject  {
 		return vehicle;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
 	public double getAcceleration() {
 		return this.acceleration;
 	}
 
-	public void setAcceleration(double acceleration) {
+	private void setAcceleration(double acceleration)
+	{
 		double max_acc = this.vehicle.getMaxAcceleration();
-		if (acceleration <= max_acc)
-			this.acceleration =  acceleration;
-		else
-			this.acceleration = max_acc;
-	}
 
-	//can change its behavior at runtime maybe? shouldn't br able to get it I think
-	public void setBehavior(Behavior behavior) {
-		this.behavior = behavior;
+		if (acceleration <= max_acc) this.acceleration =  acceleration;
+
+		else this.acceleration = max_acc;
 	}
 
 	public double getDuration_AfterChangeLane() {
@@ -136,11 +123,11 @@ public class Driver implements Subject  {
 	}
 
 	public int getStartLane() {
-		return startLane;
+		return start_lane;
 	}
 
-	public void setStartLane(int startLane) {
-		this.startLane = startLane;
+	public void setStartLane(int start_lane) {
+		this.start_lane = start_lane;
 	}
 
 	public int getEndLane() {
@@ -161,85 +148,75 @@ public class Driver implements Subject  {
 		return crashed;
 	}
 	
-	public void drive(int distance_from_car_in_front, boolean can_change_lane) {
+	public void drive(int distance_from_car_in_front, boolean can_change_lane)
+	{
 		
-		if(crashed) return;
-		
-		
-		double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
-		int carPosX = (int) (x + deltaX);
-		if (carPosX < TWindow.WINDOW_LENGTH)
-			setX((int) (getX() + deltaX));
-		else
-			notifyObservers();
-		
-		//change y coordinate
-		double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
-		//here must use this.y , cannot use getY(). otherwise cannot change lane.
-		double YCoordinate = this.y + deltaY;
-		YCoordinate = ( YCoordinate < TWindow.LEFTWANE_Y_Coordinate ) ? TWindow.LEFTWANE_Y_Coordinate : YCoordinate ;
-		YCoordinate = ( YCoordinate > TWindow.RIGHTWANE_Y_Coordinate ) ? TWindow.RIGHTWANE_Y_Coordinate : YCoordinate ;
-		setY( YCoordinate );
+		if(!crashed)
+		{
+			double deltaX = tsf_Util.Formula.getDeltaDisplacement(this);
+			double deltaY = tsf_Util.Formula.getDisplacement_LaneChange(this);
+			double deltaVelocity = tsf_Util.Formula.getDeltaVelocity(this);
+			double y_coordinate = this.y + deltaY;
 
-		double deltaVelocity = 0;
+			if ((int) (x + deltaX) < TWindow.WINDOW_LENGTH) setX((int) (getX() + deltaX));
 
-		if(velocity > 0){ 
-			if (velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed()) {
+			else notifyObservers();
+
+			y_coordinate = ( y_coordinate < TWindow.LEFTWANE_Y_Coordinate ) ? TWindow.LEFTWANE_Y_Coordinate : y_coordinate;
+			y_coordinate = ( y_coordinate > TWindow.RIGHTWANE_Y_Coordinate ) ? TWindow.RIGHTWANE_Y_Coordinate : y_coordinate;
+			setY( y_coordinate );
+
+			if(velocity > 0 && velocity >= vehicle.getMaxSpeed() || velocity >= behavior.getPreferredSpeed())
 				setAcceleration(behavior.getPreferredDcc());
-			}
-		}
-		else{ // velocity <=0 
-			setAcceleration(behavior.getPreferredAcc());
-		}
 
-		deltaVelocity = tsf_Util.Formula.getDeltaVolecity(this);
-		setVelocity(velocity + deltaVelocity);
-		// !!NOTICE: The Car's position should be updated firstly.
+			else setAcceleration(behavior.getPreferredAcc());
+
+			setVelocity(velocity + deltaVelocity);
+
+			if (this.isChangingLane)
+				setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
 
 
-		if (this.isChangingLane) {
-			setDuration_AfterChangeLane(getDuration_AfterChangeLane() + globalContract.TimeControl.TIME_UNIT);
-		}
-		
-		if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1) {
-			setAcceleration(behavior.getPreferredAcc());
-		} 
-		else {
-//			setAcceleration(behavior.getSlamBrakeDcc());
-			if(tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front) < this.behavior.getPreferredDcc()){
-				setAcceleration(behavior.getPreferredDcc());
-			}
-			else{
-				if(this.velocity == 0 ){
-					///setAcceleration( tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front) );
-					 changeLane();
-				}
-				else{
-					if(Math.random() >0.5){
+			if (distance_from_car_in_front > behavior.getPreferredDistance() || distance_from_car_in_front == -1)
+				setAcceleration(behavior.getPreferredAcc());
 
-						setAcceleration(-1*tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front));
-						if(distance_from_car_in_front < Vehicle.LENGTH + Vehicle.MARGIN){
-							this.velocity = 0;
-							this.acceleration = 0;
-						}							
-					}
-					else{
-						setAcceleration(this.behavior.getPreferredAcc());
-						if (behavior.likesToChangeLane() ){
-							if( can_change_lane) {
-								changeLane();
+			else
+			{
+				if(tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front) < this.behavior.getPreferredDcc())
+					setAcceleration(behavior.getPreferredDcc());
+
+				else
+				{
+					if(this.velocity == 0 ) changeLane();
+
+					else
+					{
+						if(Math.random() >0.5)
+						{
+							setAcceleration(-1*tsf_Util.Formula.getNeededDcc(velocity, distance_from_car_in_front));
+
+							if(distance_from_car_in_front < Vehicle.LENGTH + Vehicle.MARGIN)
+							{
+								this.velocity = 0;
+								this.acceleration = 0;
 							}
-							else{
-								stopChangeLane();
-							}
+						}
+						else
+						{
+							setAcceleration(this.behavior.getPreferredAcc());
+
+							if (behavior.likesToChangeLane() && can_change_lane && can_change_lane) changeLane();
+
+							else stopChangeLane();
 						}
 					}
 				}
-				
+
 			}
 		}
-		
 	}
+
+
 
 	public int getOvertakingGap() {
 		return behavior.getOvertakingGap();
@@ -262,7 +239,4 @@ public class Driver implements Subject  {
 	public void remove(Observer observer) {
 		observersList.remove(observer);
 	}
-	
-
- 
 }

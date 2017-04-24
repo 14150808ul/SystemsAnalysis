@@ -1,13 +1,11 @@
 package driver;
 
-
-public interface Behavior
+abstract class Behavior
 {
-	double getPreferredAcc();
-	double getPreferredDcc();
-	int getPreferredDistance();
-    double getPreferredSpeed();
-    boolean likesToChangeLane();
-    int getOvertakingGap();
-	double getSlamBrakeDcc();
+    abstract double getPreferredAcc();
+    abstract double getPreferredDcc();
+    abstract int getPreferredDistance();
+    abstract double getPreferredSpeed();
+    abstract boolean likesToChangeLane();
+    abstract int getOvertakingGap();
 }

@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import collision.Collision;
-import driver.AverageDriver;
+//import driver.AverageDriver;
 import driver.Driver;
 import driver.DriverFactory;
 import pattern.Observer;
@@ -44,15 +44,18 @@ public abstract class Road implements Observer{
 	}
 	
 	//DriverFactory !!!
-	public void generateDriver(){ 
-		if(Math.random() > 0.5){ // two block should execute one either not both.
+	public void generateDriver()
+	{ int random = (int) (Math.random() * 3 + 1);
+		if(Math.random() > 0.5)
+		{ // two block should execute one either not both.
+		
 			if(	Sense.isLaneClear(this.driver_list, Road.leftLane) ) {
-				this.addDriver(new DriverFactory().createDriver_withSpecificLane(this, Road.leftLane));
+				this.addDriver(new DriverFactory().createDriver_withSpecificLane(this, Road.leftLane, random));
 			}
 		}
 		else{
 			if(	Sense.isLaneClear(this.driver_list, Road.rightLane) ) {
-				this.addDriver(new DriverFactory().createDriver_withSpecificLane(this, Road.rightLane));
+				this.addDriver(new DriverFactory().createDriver_withSpecificLane(this, Road.rightLane, random));
 			}
 		}
 		Road.timeCounter = 0;

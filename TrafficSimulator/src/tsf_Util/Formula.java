@@ -16,11 +16,11 @@ public class Formula {
 		return dispalcement;
 	}
 
-	public static double getDeltaVolecity(Driver eachDriver) {
+	public static double getDeltaVelocity(Driver eachDriver) {
 		return eachDriver.getAcceleration() * (ScaleControl.TIME_ScaleRatio);
 	}
 	
-	public static double getDeltaVolecity_Decrease(Driver eachDriver) {
+	public static double getDeltaVelocity_Decrease(Driver eachDriver) {
 		return -1 * eachDriver.getAcceleration() * (ScaleControl.TIME_ScaleRatio);
 	}
 	

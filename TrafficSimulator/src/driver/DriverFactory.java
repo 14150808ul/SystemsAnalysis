@@ -2,30 +2,24 @@ package driver;
 import road.Road;
 import vehicle.Vehicle;
 
-public class DriverFactory {
-    private static Behavior [] BEHAVIOR = { new YoungDriver(), new AverageDriver(), new OldDriver()};
+public class DriverFactory
+{
     private static int [] LANES = { 100 , 148 };
 
-    public Driver createDriver(Road road) {
-        int random_image = (int) (Math.random() * 3);
-        int random_lane = (int) (Math.random() * 2);
-        return new Driver(  road,
-			        		new Vehicle (10, (Math.random() * .02), random_image), 
-			        		BEHAVIOR[(int) (Math.random() * 3)],
-			        		-60, // must be 0 -> otherwise cause problem
-			        		LANES[random_lane],
-			        		3,
-			        		random_lane);
-    }
-    
-    public Driver createDriver_withSpecificLane(Road road, int lane) {
-        int random_image = (int) (Math.random() * 3);
-        return new Driver(  road,
-			        		new Vehicle (4.4, (Math.random() * .02), random_image), 
-			        		BEHAVIOR[(int) (Math.random() * 3)],
-			        		-60, // must be 0 -> otherwise cause problem
-			        		LANES[lane],
-			        		2.7,
-			        		lane);
+    public Driver createDriver_withSpecificLane(Road road, int lane, int random_car)
+	{
+        double random_acceleration = (Math.random() * 0.3);
+
+        switch(random_car)
+        {
+           case 1:
+               return new Driver(road, new Vehicle (4.4, random_acceleration, 1), new YoungDriver(new YoungDriver(new YoungDriver(new ConcreteBehavior()))), -60, LANES[lane], 2.7, lane);
+
+            case 2:
+               return new Driver(road, new Vehicle (4.4, random_acceleration, 0),new YoungDriver(new ConcreteBehavior()), -60, LANES[lane], 2.7, lane);
+
+            default:
+               return new Driver(road, new Vehicle (4.4, random_acceleration, 2),new YoungDriver(new ConcreteBehavior()), -60, LANES[lane], 2.7, lane);
+        }
     }
 }
