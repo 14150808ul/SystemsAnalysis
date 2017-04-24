@@ -17,7 +17,7 @@ Project needs to be organised again and fault due to George
 
   
 + inital Class Diagram
- ![initial class diagram ](/DocumentAll/diagrams/packageDiagram_.png.png)
+ ![initial class diagram ](/DocumentAll/diagrams/classDiagram_.png)
  
  
 + initial E-R Diagram
