@@ -13,11 +13,11 @@ Project needs to be organised again and fault due to George
  ![initial use case diagram ](/DocumentAll/diagrams/use_case.png)
   
 + inital architecture diagram
- ![initial use case diagram ](/DocumentAll/diagrams/use_case.png)
+ ![initial use case diagram ](/DocumentAll/diagrams/initialArchi.png)
 
   
 + inital Class Diagram
- ![initial class diagram ](/DocumentAll/diagrams/initialArchi.png)
+ ![initial class diagram ](/DocumentAll/diagrams/packageDiagram_.png.png)
  
  
 + initial E-R Diagram
